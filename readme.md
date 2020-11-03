@@ -18,7 +18,6 @@
 5. in the index.js, make sure to init all the packages:
 
     * require express & init it; require express-ejs-layouts
-    <br>
     * set up ejs and ejs layouts
     * set up a body parser middleware to make req.body work  
 6. configure the routes in the controller from `.send` to `.render` and include the relevant ejs files for each route
