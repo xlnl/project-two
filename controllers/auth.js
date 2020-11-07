@@ -2,6 +2,7 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
+const passport = require("../config/ppConfig.js")
 
 router.get('/signup', (req, res)=>{
     res.render('auth/signup')
@@ -12,9 +13,7 @@ router.post('/signup', (req, res)=>{
     // if it does, throw an error message
     // otherwise create a new user and store them in the db
     db.user.findOrCreate({ // check if that email is already in db
-        where: {
-            email: req.body.email
-        },
+        where: {email: req.body.email},
         defaults: {
             name: req.body.name, 
             password: req.body.password
@@ -23,14 +22,19 @@ router.post('/signup', (req, res)=>{
     .then(([createdUser, wasCreated])=>{
         if(wasCreated){
             console.log(`just created the following user:`, createdUser)
+            passport.authenticate("local", {
+                successRedirect: "/",
+                successFlash: "Account created and logged in!"
+            })(req, res) // IIFE = immediate invoked function
         } else {
-            console.log(' An account associated with that email address already exists! Try loggin in.')
+            console.log(' An account associated with that email address already exists! Did you mean to login?')
+            // res.redirect("/auth/login")
+
         }
-        // redirect to login page
-        res.redirect('/auth/login')
     })
     .catch(err=>{
-        console.log('Did not post to db!!! See error>>>>>>>>', err)
+        req.flash("error", err.message)
+        res.redirect("/auth/signup")
     })
 })
 
@@ -38,10 +42,18 @@ router.get('/login', (req, res)=>{
     res.render('auth/login')
 })
 
-router.post('/login', (req, res)=>{
-    console.log('Trying to log in with this input:', req.body)
-    //redirect to home route
-    res.redirect('/')
+router.post('/login', passport.authenticate("local", {
+    failureRedirect: "/auth/login",
+    successRedirect: "/",
+    failureFlash: "Invalid username and/or password.",
+    successFlash: "You are now logged in."
+    })
+)
+
+router.get("/logout", (req, res)=>{
+    req.logout() //! -> flash 
+    req.flash("success", "Success! You're logged out.")
+    res.redirect("/")
 })
 
 module.exports = router
