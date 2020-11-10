@@ -13,27 +13,57 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.comment)
+      models.user.hasMany(models.tip)
     }
   };
   user.init({
-    name: {
+    firstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: {
-          args: [2, 25],
-          msg: 'Name must be 2-25 characters long.'
+          args: [2, 30],
+          msg: 'Name must be 2-30 characters long.'
         }
       }
     },
-    email: {
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [2, 30],
+          msg: 'Name must be 2-30 characters long.'
+        }
+      }
+    },
+    phone: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: {
-          args: true,
-          msg: 'Please enter a valid email address.'
+        is: {
+          args: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+          msg: 'Please enter a valid phone number.'
+        }
+      }
+    },
+    county: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [5,50],
+          msg: 'Username must be between 5 and 50 characters.'
         }
       }
     },

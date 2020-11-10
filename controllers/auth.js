@@ -13,10 +13,14 @@ router.post('/signup', (req, res)=>{
     // if it does, throw an error message
     // otherwise create a new user and store them in the db
     db.user.findOrCreate({ // check if that email is already in db
-        where: {email: req.body.email},
+        where: {username: req.body.username},
         defaults: {
-            name: req.body.name, 
-            password: req.body.password
+            firstName: req.body.firstName, 
+            lastName: req.body.lastName, 
+            password: req.body.password,
+            phone: req.body.phone,
+            county: req.body.county,
+            city: req.body.city,
         }
     }) // create new user if email wasn't found
     .then(([createdUser, wasCreated])=>{

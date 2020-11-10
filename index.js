@@ -28,7 +28,7 @@ app.use(passport.session())
 // flash middeware - has to be after the session + passport middleware
 app.use(flash())
 
-// custome middleware so the messages are always available in our ejs and we don't have to pass through req.alerts to our ejs mannually
+// custom middleware so the messages are always available in our ejs and we don't have to pass through req.alerts to our ejs mannually
 app.use((req, res, next)=>{
     //before every route, attach the flash message and current user to res.locals
     res.locals.alerts = req.flash();
@@ -39,13 +39,20 @@ app.use((req, res, next)=>{
 // use controllers
 app.use("/auth", require("./controllers/auth.js"))
 
-// home route
+// home route - 
+// displays tips in different counties by way of search bar -> google maps API
+// displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
 app.get("/", (req, res) => {
     res.render("home")
 })
 
-app.get("/profile", isLoggedIn, (req, res) => {
-    res.render("profile")
+// my tips route - 
+// displays all the tips currentUser has made including input information about it 
+// renders the tip on the map 
+// has the ability to show multiple tips at a time on the map (add addresses in an array for google maps API)
+// currentUser has the option to update the tip with more information or delete the tip, if needed
+app.get("/mytips", isLoggedIn, (req, res) => {
+    res.render("mytips")
 })
 
 app.listen(process.env.PORT, ()=> { 
