@@ -3,12 +3,16 @@
 <p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
 <div>
     <form method="POST" action="/auth/login">
-        <label for="auth-username">Username</label>
-        <input type="email" name="username" id="auth-username">
-
-        <label for="auth-password">Password</label>
-        <input type="password" name="password" id="auth-password">
-
-        <input type="submit" value="Log In">
+        <div>
+            <label for="auth-username">Username</label>
+            <input type="text" name="username" id="auth-username">
+        </div>
+        <div>
+            <label for="auth-password">Password</label>
+            <input type="password" name="password" id="auth-password">
+        </div>
+        <p>New here?</p> <a href="/auth/signup">Sign up!</a>
+        <br>
+        <input type="submit" value="Enter">
     </form>
 </div>

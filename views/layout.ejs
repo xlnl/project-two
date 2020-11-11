@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Express Auth</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Mines Sweeper</title>
 </head>
 <body>
     <header>
-        <h1>Express Authentication Boilerplate</h1>
         <nav>
             <ul>
               <% if (!currentUser) { %>
-                <li><a href="/auth/signup">Signup</a></li>
-                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/login">Log In</a></li>
               <% } else { %>
-                <li><a href="/auth/logout">Logout</a></li>
-                <li><a href="/profile">Profile</a></li>
+                <li><a href="/tips">My Tips</a></li>
+                <li><a href="/tips/new">NEW TIP</a></li>
               <% } %>
             </ul>
           </nav>

@@ -1,1 +1,24 @@
-<h2>Express Auth Boilerplate Home Page</h2>
+<h2>WELCOME, <%= currentUser.firstName %></h2>
+
+<script>
+    // Initialize and add the map
+    function initMap () {
+      // The location of Quang Tri province
+      const quangTri = {lat:16.7943,lng:106.9634}; 
+      // The map, centered at Quang Tri province
+      var options = {
+        zoom:8,
+        center: quangTri
+      }
+      const map = new google.maps.Map(document.getElementById("map"), options);
+      // The marker, positioned at Quang Tri province
+      const marker = new google.maps.Marker({
+        position: quangTri,
+        map: map,
+      });
+    }
+</script>
+
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfeegg-mom6ijpGqwW6nQaryn7GcfgPj8&callback=initMap&libraries=&v=weekly" >
+</script>

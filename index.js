@@ -7,9 +7,12 @@ const passport = require("./config/ppConfig.js")
 const flash = require("connect-flash")
 const isLoggedIn = require("./middleware/isLoggedIn")
 
+
 // set up ejs and ejs layouts
 app.set("view engine", "ejs")
 app.use(ejsLayouts)
+
+app.use(express.static(__dirname + '/public/'))
 
 // body parser middleware to make req.body work
 app.use(express.urlencoded({extended: false}))
@@ -39,11 +42,19 @@ app.use((req, res, next)=>{
 // use controllers
 app.use("/auth", require("./controllers/auth.js"))
 
+// landing route - 
+// displays intro video 
+// short description of mission + call to action with "join" link to sign up
+app.get("/", (req, res) => {
+    res.render("landing")
+})
+
 // home route - 
 // displays tips in different counties by way of search bar -> google maps API
 // displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
     res.render("home")
+    key=process.env.API_KEY
 })
 
 // my tips route - 
@@ -51,10 +62,12 @@ app.get("/", (req, res) => {
 // renders the tip on the map 
 // has the ability to show multiple tips at a time on the map (add addresses in an array for google maps API)
 // currentUser has the option to update the tip with more information or delete the tip, if needed
-app.get("/mytips", isLoggedIn, (req, res) => {
-    res.render("mytips")
+app.get("/tips/show", isLoggedIn, (req, res) => {
+    res.render("/tips/show")
 })
 
 app.listen(process.env.PORT, ()=> { 
     console.log("You're listening to the spooky sounds of port 8000")
 })
+
+
