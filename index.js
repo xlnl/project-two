@@ -6,6 +6,13 @@ const session = require("express-session")
 const passport = require("./config/ppConfig.js")
 const flash = require("connect-flash")
 const isLoggedIn = require("./middleware/isLoggedIn")
+const { google } = require("googleapis")
+const request = require("request")
+const cors = require("cors")
+const urlParse = require("url-parse")
+const queryParse = require("query-string")
+const bodyParser = require("body-parser")
+const axios = require("axios")
 
 
 // set up ejs and ejs layouts
@@ -39,6 +46,10 @@ app.use((req, res, next)=>{
     next()
 })
 
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: false }))
+app.use(bodyParser.json())
+
 // use controllers
 app.use("/auth", require("./controllers/auth.js"))
 
@@ -53,18 +64,18 @@ app.get("/", (req, res) => {
 // displays tips in different counties by way of search bar -> google maps API
 // displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
 app.get("/home", (req, res) => {
-    res.render("home")
-    key=process.env.API_KEY
+    const key = process.env.PORT;
+    res.render("home", {key})
 })
 
-// my tips route - 
-// displays all the tips currentUser has made including input information about it 
-// renders the tip on the map 
-// has the ability to show multiple tips at a time on the map (add addresses in an array for google maps API)
-// currentUser has the option to update the tip with more information or delete the tip, if needed
-app.get("/tips/show", isLoggedIn, (req, res) => {
-    res.render("/tips/show")
+app.get("/tips/new", isLoggedIn, (req, res) => {
+    res.render("tips/new")
 })
+
+app.get("/tips/show", isLoggedIn, (req, res) => {
+    res.render("tips/show")
+})
+
 
 app.listen(process.env.PORT, ()=> { 
     console.log("You're listening to the spooky sounds of port 8000")

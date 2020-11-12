@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    county: {
+    provinceName: {
       type: DataTypes.STRING,
       allowNull: false,
     },

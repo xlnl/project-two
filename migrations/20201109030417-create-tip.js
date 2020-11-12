@@ -8,16 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      lastName: {
+      username: {
         type: Sequelize.STRING
       },
       address: {
         type: Sequelize.STRING
       },
-      countyName: {
+      provinceName: {
         type: Sequelize.STRING
       },
       userId: {
@@ -26,7 +23,7 @@ module.exports = {
       description: {
         type: Sequelize.TEXT
       },
-      countyId: {
+      provinceId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

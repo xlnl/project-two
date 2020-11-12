@@ -12,18 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.tip.belongsTo(models.user)
-      models.tip.belongsTo(models.county)
+      models.tip.belongsTo(models.province)
       models.tip.hasMany(models.comment)
     }
   };
   tip.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
+    username: DataTypes.STRING,
     address: DataTypes.STRING,
-    countyName: DataTypes.STRING,
+    provinceName: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     description: DataTypes.TEXT,
-    countyId: DataTypes.INTEGER
+    provinceId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'tip',

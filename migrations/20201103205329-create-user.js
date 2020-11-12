@@ -17,7 +17,7 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      county: {
+      provinceName: {
         type: Sequelize.STRING
       },
       city: {
