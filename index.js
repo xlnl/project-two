@@ -63,9 +63,26 @@ app.get("/", (req, res) => {
 // home route - 
 // displays tips in different counties by way of search bar -> google maps API
 // displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
-app.get("/home", (req, res) => {
+app.get("/home", isLoggedIn, (req, res) => {
     const key = process.env.PORT;
     res.render("home", {key})
+})
+
+// post route for creating comments
+app.post("/home", isLoggedIn, (req, res) => {
+    let tipId = req.params.id;
+    console.log(req.body);
+    db.comment.create({
+      name: req.body.name,
+      content: req.body.content,
+      tipId: tipId
+    })
+    .then(() => {
+      res.redirect("/home")
+    }).catch(error => {
+      console.log(error)
+    //   res.status(400).render('main/404')
+    })
 })
 
 app.listen(process.env.PORT, ()=> { 
