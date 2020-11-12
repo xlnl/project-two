@@ -45,6 +45,9 @@ app.use((req, res, next)=>{
     next()
 })
 
+// middleware for images (multer)
+// source: https://medium.com/@SigniorGratiano/image-uploads-with-multer-f306469ef2
+
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false }))
 app.use(bodyParser.json())
