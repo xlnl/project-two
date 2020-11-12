@@ -14,13 +14,22 @@ var options = {
 
 var geocoder = NodeGeocoder(options)
 
-// CREATE - new route; add new tip to DB
-router.get("/tips/new", isLoggedIn, (req, res) => {
+// NEW - show form to create new tip
+router.get("/show", isLoggedIn, (req, res) => {
     res.render("/tips/new")
 })
 
+// CREATE - add new tip to DB
+router.post("/new", isLoggedIn, (req, res) => {
+    var username = {username: req.body.username, userId: req.body.userId}
+    var address = req.body.address;
+    var provinceName = req.body.provinceName;
+    var description = req.body.description;
+
+})
+
 // READ - show route; show all tips
-router.get("/tips/show", isLoggedIn, (req, res) => {
+router.get("/show", isLoggedIn, (req, res) => {
     db.tip.findAll({
         where: { username: req.params.username },
         include: [db.user]
@@ -35,7 +44,7 @@ router.get("/tips/show", isLoggedIn, (req, res) => {
 })
 
 // READ - shows more info about one tip
-router.get("tips/show/:id", isLoggedIn, (req, res) => {
+router.get("/show/:id", isLoggedIn, (req, res) => {
     db.tip.findOne({
         where: { id: req.params.id },
         include: [db.user]
@@ -49,19 +58,3 @@ router.get("tips/show/:id", isLoggedIn, (req, res) => {
       })
 })
 
-// post route for creating comments
-router.post("/home", isLoggedIn, (req, res) => {
-    let tipId = req.params.id;
-    console.log(req.body);
-    db.comment.create({
-      name: req.body.name,
-      content: req.body.content,
-      tipId: tipId
-    })
-    .then(() => {
-      res.redirect("/home")
-    }).catch(error => {
-      console.log(error)
-    //   res.status(400).render('main/404')
-    })
-  })
