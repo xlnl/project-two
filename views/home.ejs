@@ -1,4 +1,12 @@
 <h2>WELCOME, <%= currentUser.firstName %></h2>
+
+<h4>County: <%= province.name %></h4>
+    <% province.tipId.forEach(tip=>{%>
+        <p><%= tip.username %></p>
+        <p><%= tip.description %></p>
+    <%})%>
+</div>
+
 <!-- 
 <script>
     // Initialize and add the map

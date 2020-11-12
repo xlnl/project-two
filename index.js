@@ -5,7 +5,6 @@ const ejsLayouts = require("express-ejs-layouts")
 const session = require("express-session")
 const passport = require("./config/ppConfig.js")
 const flash = require("connect-flash")
-const isLoggedIn = require("./middleware/isLoggedIn")
 const { google } = require("googleapis")
 const request = require("request")
 const cors = require("cors")
@@ -19,7 +18,7 @@ const axios = require("axios")
 app.set("view engine", "ejs")
 app.use(ejsLayouts)
 
-app.use(express.static(__dirname + '/public/'))
+app.use(express.static(__dirname + '/public'))
 
 // body parser middleware to make req.body work
 app.use(express.urlencoded({extended: false}))
@@ -52,6 +51,7 @@ app.use(bodyParser.json())
 
 // use controllers
 app.use("/auth", require("./controllers/auth.js"))
+app.use("/tips", require("./controllers/tips.js"))
 
 // landing route - 
 // displays intro video 
@@ -67,15 +67,6 @@ app.get("/home", (req, res) => {
     const key = process.env.PORT;
     res.render("home", {key})
 })
-
-app.get("/tips/new", isLoggedIn, (req, res) => {
-    res.render("tips/new")
-})
-
-app.get("/tips/show", isLoggedIn, (req, res) => {
-    res.render("tips/show")
-})
-
 
 app.listen(process.env.PORT, ()=> { 
     console.log("You're listening to the spooky sounds of port 8000")
