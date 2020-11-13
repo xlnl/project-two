@@ -10,12 +10,12 @@ const request = require("request")
 const cors = require("cors")
 const urlParse = require("url-parse")
 const bodyParser = require("body-parser")
-const isLoggedIn = require("./middleware/isLoggedIn")
 const methodOverride = require("method-override")
 
 
 // body parser middleware to make req.body work
 app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 // set up ejs and ejs layouts
 app.set("view engine", "ejs")
 app.use(ejsLayouts)
@@ -62,51 +62,8 @@ app.get("/", (req, res) => {
     res.render("landing")
 })
 
-// home route - 
-// displays tips in different counties by way of search bar -> google maps API
-// displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
-app.get("/home", isLoggedIn, (req, res) => {
-    // const key = process.env.PORT;
-    res.render("home")
-})
-
-// post route for creating comments
-app.post("/home/:id", isLoggedIn, (req, res) => {
-    let tipId = req.params.id;
-    console.log(req.body);
-    db.comment.create({
-      name: req.body.name,
-      content: req.body.content,
-      tipId: tipId
-    })
-    .then(() => {
-      res.redirect(`/home/${tipId}`)
-    }).catch(error => {
-      console.log("errrrrrrrrr!!!!!!:", error)
-    //   res.status(400).render('main/404')
-    })
-})
-
-// READ - shows more info about one tip
-app.get("/home/:id", isLoggedIn, (req, res) => {
-  db.tip.findOne({
-      where: { id: req.params.id },
-      include: [db.user, db.comment]
-    })
-    .then((tip) => {
-      if (!tip) throw Error()
-      console.log(tip.username)
-      console.log(tip.comments)
-      res.render("/tips/show", {tip})
-    })
-    .catch((error) => {
-      console.log("errrrrrrr!!!!:", error)
-    })
-})
-
-
-app.listen(process.env.PORT, ()=> { 
-    console.log("You're listening to the spooky sounds of port 8000")
+app.listen(process.env.PORT, () => { 
+    console.log(`You're listening to the bombastic sounds of port ${process.env.PORT}`)
 })
 
 

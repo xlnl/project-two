@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
@@ -22,7 +21,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 // CREATE - add new tip 
 router.post("/new", isLoggedIn, (req, res) => {
-    var username =req.body.username
+    var username = req.body.username
     var userId = req.body.userId
     var provinceName = req.body.provinceName
     var description = req.body.description
@@ -38,6 +37,7 @@ router.post("/new", isLoggedIn, (req, res) => {
         var address = data[0].formattedAddress
         var newTip = {username: username, address: address, provinceName: provinceName, description: description, provinceId: provinceId, lat: lat, lng: lng}
         // create tip and save to DB
+        let userId = userId
         db.tip.create(newTip, (error, createdTip) => {
             if(error) {
                 console.log("errrrrrrrrr!!!:", error)

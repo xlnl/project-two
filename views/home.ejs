@@ -1,15 +1,16 @@
 <h2>WELCOME, <%= currentUser.firstName %></h2>
 
-<h4>County: <%= province.name %></h4>
+<h4>Province: <%= province.name %></h4>
     <% province.tipId.forEach(tip=>{%>
         <p><%= tip.username %></p>
         <p><%= tip.description %></p>
     <%})%>
 </div>
 
+// Initialize and add the map
+<div id="map"></div>
+
 <script>
-    // Initialize and add the map
-    <div id="map"></div>
     initMap (() => {
       // The location of Quang Tri province
       var lat = 16.7943;
@@ -41,7 +42,7 @@
 </script>
 
 <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfeegg-mom6ijpGqwW6nQaryn7GcfgPj8&callback=initMap">
 </script>
 
 <!-- comment form here -->
