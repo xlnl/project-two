@@ -54,6 +54,7 @@ app.use(bodyParser.json())
 // use controllers
 app.use("/auth", require("./controllers/auth.js"))
 app.use("/tips", require("./controllers/tips.js"))
+app.use("/home", require("./controllers/home.js"))
 
 // landing route - 
 // displays intro video 

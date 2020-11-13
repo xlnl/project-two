@@ -11,14 +11,8 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
-      address: {
-        type: Sequelize.STRING
-      },
-      lat: {
-        type: Sequelize.DECIMAL
-      },
-      lng: {
-        type: Sequelize.DECIMAL
+      location: {
+        type: Sequelize.GEOMETRY('POINT', 4326)
       },
       provinceName: {
         type: Sequelize.STRING

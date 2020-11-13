@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   province.init({
     name: DataTypes.STRING,
-    tipId: DataTypes.INTEGER
+    tipId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'province',

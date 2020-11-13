@@ -1,49 +1,11 @@
 <h2>WELCOME, <%= currentUser.firstName %></h2>
 
-<h4>Province: <%= province.name %></h4>
+<!-- <h4>Province: <%= province.name %></h4>
     <% province.tipId.forEach(tip=>{%>
         <p><%= tip.username %></p>
         <p><%= tip.description %></p>
     <%})%>
-</div>
-
-// Initialize and add the map
-<div id="map"></div>
-
-<script>
-    initMap (() => {
-      // The location of Quang Tri province
-      var lat = 16.7943;
-      var lng = 106.9634;
-      var center = {lat: lat,lng: lang }; 
-      // The map, centered at Quang Tri province
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 8,
-        center: center,
-        scrollwheel: false
-      });
-      var contentString = `
-        <strong><%= tip.id %><br />
-        <%= tip.address %></strong>
-        <p><%= tip.description %></p>
-      `
-      var infowindow = new google.maps.InfoWindow({
-          content: contentString
-      })
-      // The marker, positioned at Quang Tri province
-      const marker = new google.maps.Marker({
-        position: center,
-        map: map,
-      });
-      marker.addListener("click", () => {
-          infowindow.open(map,marker)
-      })
-    })
-</script>
-
-<script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfeegg-mom6ijpGqwW6nQaryn7GcfgPj8&callback=initMap">
-</script>
+</div> -->
 
 <!-- comment form here -->
 <h5>Comment here:</h5>

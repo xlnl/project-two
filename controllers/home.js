@@ -8,13 +8,13 @@ var NodeGeocoder = require("node-geocoder")
 // home route - 
 // displays tips in different counties by way of search bar -> google maps API
 // displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
-router.get("/home", isLoggedIn, (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
     // const key = process.env.PORT;
     res.render("home")
 })
 
 // post route for creating comments
-router.post("/home/:id", isLoggedIn, (req, res) => {
+router.post("/:id", isLoggedIn, (req, res) => {
     let tipId = req.params.id;
     console.log(req.body);
     db.comment.create({
@@ -31,7 +31,7 @@ router.post("/home/:id", isLoggedIn, (req, res) => {
 })
 
 // READ - shows more info about one tip
-router.get("/home/:id", isLoggedIn, (req, res) => {
+router.get("/:id", isLoggedIn, (req, res) => {
   db.tip.findOne({
       where: { id: req.params.id },
       include: [db.user, db.comment]
@@ -46,3 +46,5 @@ router.get("/home/:id", isLoggedIn, (req, res) => {
       console.log("errrrrrrr!!!!:", error)
     })
 })
+
+module.exports = router
