@@ -77,3 +77,4 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
       })
 })
 
+module.exports = router
