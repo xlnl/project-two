@@ -17,7 +17,7 @@ var geocoder = NodeGeocoder(options)
 
 // NEW - show form to create new tip
 router.get("/new", isLoggedIn, (req, res) => {
-    res.render("/tips/new")
+    res.render("tips/new")
 })
 
 // CREATE - add new tip 
@@ -31,7 +31,7 @@ router.post("/new", isLoggedIn, (req, res) => {
         if( error || !data.length) {
             console.log(error)
             req.flash("error", "Invalid Address")
-            return req.redirect("/new");
+            return res.redirect("/tips/new");
         }
         var lat = data[0].latitude
         var lng = data[0].longitude
@@ -56,7 +56,7 @@ router.get("/show", isLoggedIn, (req, res) => {
     })
     .then((tip) => {
         if (!tip) throw Error()
-        res.render("/tips/show", {tips:tip})
+        res.render("tips/show", {tips:tip})
     })
     .catch((error) => {
         console.log("errrrrrrr!!!!:", error)
@@ -73,7 +73,7 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
         if (!tip) throw Error()
         console.log(tip.username)
         console.log(tip.comments)
-        res.render("/tips/show", {tip})
+        res.render("tips/show", {tip})
       })
       .catch((error) => {
         console.log("errrrrrrr!!!!:", error)
