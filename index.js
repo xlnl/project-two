@@ -9,20 +9,18 @@ const { google } = require("googleapis")
 const request = require("request")
 const cors = require("cors")
 const urlParse = require("url-parse")
-const queryParse = require("query-string")
 const bodyParser = require("body-parser")
-const axios = require("axios")
 const isLoggedIn = require("./middleware/isLoggedIn")
+const methodOverride = require("method-override")
 
-
-// set up ejs and ejs layouts
-app.set("view engine", "ejs")
-app.use(ejsLayouts)
-
-app.use(express.static(__dirname + '/public'))
 
 // body parser middleware to make req.body work
 app.use(express.urlencoded({extended: false}))
+// set up ejs and ejs layouts
+app.set("view engine", "ejs")
+app.use(ejsLayouts)
+app.use(express.static(__dirname + '/public'))
+app.use(methodOverride("_method"))
 
 // session middleware
 app.use(session({
@@ -46,7 +44,7 @@ app.use((req, res, next)=>{
     next()
 })
 
-// middleware for images (multer)
+// middleware for images (multer) - stretch goal
 // source: https://medium.com/@SigniorGratiano/image-uploads-with-multer-f306469ef2
 
 app.use(cors())

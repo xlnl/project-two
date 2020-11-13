@@ -19,6 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   tip.init({
     username: DataTypes.STRING,
     address: DataTypes.STRING,
+    lat: DataTypes.DECIMAL,
+    lng: DataTypes.DECIMAL,
     provinceName: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     description: DataTypes.TEXT,

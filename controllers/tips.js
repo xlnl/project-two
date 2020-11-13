@@ -23,7 +23,6 @@ router.get("/new", isLoggedIn, (req, res) => {
 // CREATE - add new tip 
 router.post("/new", isLoggedIn, (req, res) => {
     var username = {username: req.body.username, userId: req.body.userId}
-    var address = req.body.address
     var provinceName = req.body.provinceName
     var description = req.body.description
     var provinceId = req.body.provinceId
