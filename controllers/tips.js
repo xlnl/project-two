@@ -3,13 +3,13 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const passport = require("../config/ppConfig.js")
-const isLoggedIn = require("./middleware/isLoggedIn")
+const isLoggedIn = require("../middleware/isLoggedIn")
 var NodeGeocoder = require("node-geocoder")
 
 var options = {
     provider: "google",
     httpAdapter: "https",
-    apiKey = process.env.GEOCODER_API_KEY,
+    apiKey: process.env.GEOCODER_API_KEY,
     formatter: null
 }
 
@@ -27,28 +27,28 @@ router.post("/new", isLoggedIn, (req, res) => {
     var provinceName = req.body.provinceName
     var description = req.body.description
     var provinceId = req.body.provinceId
-})
-geocoder.geocode(req.body.address, (error, data) => {
-    if( error || !data.length) {
-        console.log(error)
-        req.flash("error", "Invalid Address")
-        return req.redirect("/new");
-    }
-    var lat = data[0].latitude
-    var lng = data[0].longitude
-    var address = data[0].formattedAddress
-    var newTip = {username: username, address: address, provinceName: provinceName, description: description, provinceId: provinceId, lat: lat, lng: lng}
-    // create tip and save to DB
-    db.tip.create(newTip, (error, createdTip) => {
-        if(error) {
-            console.log("errrrrrrrrr!!!:", error)
-        }else {
-            console.log(createdTip)
+    geocoder.geocode(req.body.address, (error, data) => {
+        if( error || !data.length) {
+            console.log(error)
+            req.flash("error", "Invalid Address")
+            return req.redirect("/new");
         }
+        var lat = data[0].latitude
+        var lng = data[0].longitude
+        var address = data[0].formattedAddress
+        var newTip = {username: username, address: address, provinceName: provinceName, description: description, provinceId: provinceId, lat: lat, lng: lng}
+        // create tip and save to DB
+        db.tip.create(newTip, (error, createdTip) => {
+            if(error) {
+                console.log("errrrrrrrrr!!!:", error)
+            }else {
+                console.log(createdTip)
+            }
+        })
     })
 })
 
-// READ - show route; show all tips
+// READ - show route; show all tips 
 router.get("/show", isLoggedIn, (req, res) => {
     db.tip.findAll({
         where: { username: req.params.username },

@@ -12,6 +12,7 @@ const urlParse = require("url-parse")
 const queryParse = require("query-string")
 const bodyParser = require("body-parser")
 const axios = require("axios")
+const isLoggedIn = require("./middleware/isLoggedIn")
 
 
 // set up ejs and ejs layouts
@@ -49,7 +50,7 @@ app.use((req, res, next)=>{
 // source: https://medium.com/@SigniorGratiano/image-uploads-with-multer-f306469ef2
 
 app.use(cors())
-app.use(bodyParser.urlencoded({extended: false }))
+app.use(bodyParser.urlencoded({extended: true }))
 app.use(bodyParser.json())
 
 // use controllers
