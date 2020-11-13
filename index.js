@@ -66,12 +66,12 @@ app.get("/", (req, res) => {
 // displays tips in different counties by way of search bar -> google maps API
 // displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
 app.get("/home", isLoggedIn, (req, res) => {
-    const key = process.env.PORT;
-    res.render("home", {key})
+    // const key = process.env.PORT;
+    res.render("home")
 })
 
 // post route for creating comments
-app.post("/home", isLoggedIn, (req, res) => {
+app.post("/home/:id", isLoggedIn, (req, res) => {
     let tipId = req.params.id;
     console.log(req.body);
     db.comment.create({
@@ -80,12 +80,30 @@ app.post("/home", isLoggedIn, (req, res) => {
       tipId: tipId
     })
     .then(() => {
-      res.redirect("/home")
+      res.redirect(`/home/${tipId}`)
     }).catch(error => {
-      console.log(error)
+      console.log("errrrrrrrrr!!!!!!:", error)
     //   res.status(400).render('main/404')
     })
 })
+
+// READ - shows more info about one tip
+app.get("/home/:id", isLoggedIn, (req, res) => {
+  db.tip.findOne({
+      where: { id: req.params.id },
+      include: [db.user, db.comment]
+    })
+    .then((tip) => {
+      if (!tip) throw Error()
+      console.log(tip.username)
+      console.log(tip.comments)
+      res.render("/tips/show", {tip})
+    })
+    .catch((error) => {
+      console.log("errrrrrrr!!!!:", error)
+    })
+})
+
 
 app.listen(process.env.PORT, ()=> { 
     console.log("You're listening to the spooky sounds of port 8000")

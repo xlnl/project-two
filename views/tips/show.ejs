@@ -1,1 +1,18 @@
 <h2><%= currentUser.name %>'s Tips</h2>
+
+
+<h5><%= tip.provinceName %></h5>
+<h5><%= tip.address %></h5>
+<p><%= tip.description %></p>
+
+<h4>Comments</h4>
+<% if(tip.comments.length > 0) { %>
+  <% tip.comments.forEach(comment => { %>
+    <div>
+      <p><strong><%= comment.name %> says:</strong></p>
+      <p><%= comment.content %></p>
+    </div>
+  <% }); %>
+<% } %>
+
+<a href="/home">&larr; Back Home</a>

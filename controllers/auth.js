@@ -19,7 +19,7 @@ router.post('/signup', (req, res)=>{
             lastName: req.body.lastName, 
             password: req.body.password,
             phone: req.body.phone,
-            county: req.body.county,
+            province: req.body.provinceName,
             city: req.body.city,
         }
     }) // create new user if email wasn't found

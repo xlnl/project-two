@@ -7,7 +7,6 @@
     <%})%>
 </div>
 
-<!-- 
 <script>
     // Initialize and add the map
     <div id="map"></div>
@@ -43,4 +42,29 @@
 
 <script defer
     src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
-</script> -->
+</script>
+
+<!-- comment form here -->
+<h5>Comment here:</h5>
+
+<form action="/home/<%= tip.id %>" method="POST">
+  <div>
+    <label for="commenter">Name</label>
+    <input type="text" id="commenter" name="name" required>
+  </div>
+  <div>
+    <label for="content">Content</label>
+    <textarea type="text" id="content" name="content" required></textarea>
+  </div>
+
+  <input type="submit" class="btn btn-primary" value="Comment">
+</form>
+
+<h5>Comments</h5>
+<% if(tip.comments.length > 0) { %>
+  <% tip.comments.forEach(comment => { %>
+      <p><strong><%= comment.name %> says:</strong></p>
+      <p><%= comment.content %></p>
+    </div>
+  <% }); %>
+<% } %>

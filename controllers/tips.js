@@ -22,7 +22,8 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 // CREATE - add new tip 
 router.post("/new", isLoggedIn, (req, res) => {
-    var username = {username: req.body.username, userId: req.body.userId}
+    var username =req.body.username
+    var userId = req.body.userId
     var provinceName = req.body.provinceName
     var description = req.body.description
     var provinceId = req.body.provinceId
@@ -66,15 +67,35 @@ router.get("/show", isLoggedIn, (req, res) => {
 router.get("/show/:id", isLoggedIn, (req, res) => {
     db.tip.findOne({
         where: { id: req.params.id },
-        include: [db.user]
+        include: [db.user, db.comment]
       })
       .then((tip) => {
         if (!tip) throw Error()
+        console.log(tip.username)
+        console.log(tip.comments)
         res.render("/tips/show", {tip})
       })
       .catch((error) => {
         console.log("errrrrrrr!!!!:", error)
       })
 })
+
+
+// post route for creating comments
+router.post('/show/:id/comments', (req, res) => {
+    let tipId = req.params.id;
+    console.log(req.body);
+    db.comment.create({
+      name: req.body.name,
+      content: req.body.content,
+      tipId: tipId
+    })
+    .then(() => {
+      res.redirect(`/show/${tipId}`)
+    }).catch(error => {
+      console.log("errrrrrrrrr!!!!!!:", error)
+    })
+})
+
 
 module.exports = router
