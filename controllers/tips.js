@@ -3,48 +3,37 @@ const router = express.Router()
 const db = require('../models')
 const passport = require("../config/ppConfig.js")
 const isLoggedIn = require("../middleware/isLoggedIn")
-var NodeGeocoder = require("node-geocoder")
 
-var options = {
-    provider: "google",
-    httpAdapter: "https",
-    apiKey: process.env.GEOCODER_API_KEY,
-    formatter: null
-}
-
-var geocoder = NodeGeocoder(options)
-
-// NEW - show form to create new tip
+// GET /tips/new - show form to create new tip
 router.get("/new", isLoggedIn, (req, res) => {
+    db.user.findOne({
+        where: {id: req.body.userId},
+    })
     res.render("tips/new")
+})
+
+router.get('/new', (req, res) => {
+    db.author.findAll()
+    .then((authors) => {
+      res.render('articles/new', { authors: authors })
+    })
+    .catch((error) => {
+      res.status(400).render('main/404')
+    })
 })
 
 // CREATE - add new tip 
 router.post("/new", isLoggedIn, (req, res) => {
-    var username = req.body.username
-    var userId = req.body.userId
-    var provinceName = req.body.provinceName
-    var description = req.body.description
-    var provinceId = req.body.provinceId
-    geocoder.geocode(req.body.address, (error, data) => {
-        if( error || !data.length) {
-            console.log(error)
-            req.flash("error", "Invalid Address")
-            return res.redirect("/tips/new");
-        }
-        var lat = data[0].latitude
-        var lng = data[0].longitude
-        var address = data[0].formattedAddress
-        var newTip = {username: username, address: address, provinceName: provinceName, description: description, provinceId: provinceId, lat: lat, lng: lng}
-        // create tip and save to DB
-        let userId = userId
-        db.tip.create(newTip, (error, createdTip) => {
-            if(error) {
-                console.log("errrrrrrrrr!!!:", error)
-            }else {
-                console.log(createdTip)
-            }
-        })
+    db.tip.create({
+        username: req.body.username,
+        provinceName: req.body.provinceName,
+        address: req.body.address,
+        description: req.body.description,
+        userId: req.body.userId,
+        provinceId: req.body.provinceId,
+    })
+    .then((createdTip) => {
+        res.redirect('tips/show')
     })
 })
 

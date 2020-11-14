@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+var geocoder = require("geocoder");
 module.exports = (sequelize, DataTypes) => {
   class tip extends Model {
     /**
@@ -17,15 +18,37 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   tip.init({
-    username: DataTypes.STRING,
-    provinceName: DataTypes.STRING,
-    location: DataTypes.GEOMETRY('POINT', 4326),
-    description: DataTypes.TEXT,
     userId: DataTypes.INTEGER,
-    provinceId: DataTypes.INTEGER
+    provinceId: DataTypes.INTEGER,
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    lat: DataTypes.FLOAT,
+    lng: DataTypes.FLOAT,
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [2,500],
+          msg: 'Description must be between 2 and 500 characters.'
+        }
+      }
+    }
   }, {
     sequelize,
-    modelName: 'tip',
+    modelName: 'tip', 
   });
+
+  tip.addHook('beforeCreate', (pendingTip, options, cb)=>{
+    geocoder.geocode(tip.address, function(err, data) {
+      if(err) return cb(err, null);
+      tip.lat = data.results[0].geometry.location.lat;
+      tip.lng = data.results[0].geometry.location.lng;
+      cb(null, tip);
+    })
+  })
+
   return tip;
-};
+}

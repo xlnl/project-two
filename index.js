@@ -5,12 +5,11 @@ const ejsLayouts = require("express-ejs-layouts")
 const session = require("express-session")
 const passport = require("./config/ppConfig.js")
 const flash = require("connect-flash")
-const { google } = require("googleapis")
-const request = require("request")
 const cors = require("cors")
 const urlParse = require("url-parse")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
+const mq = require("mapquest-api")
 
 
 // body parser middleware to make req.body work
