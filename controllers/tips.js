@@ -4,8 +4,10 @@ const db = require('../models')
 const passport = require("../config/ppConfig.js")
 const isLoggedIn = require("../middleware/isLoggedIn")
 
-// GET /tips/new - show form to create new tip
-router.get("/new", isLoggedIn, (req, res) => {
+// GET /tips/new - show form to create new tip for currentUser
+router.get("/new/:id", isLoggedIn, (req, res) => {
+    let userId = db.user.findByPk(req.user.id)
+    console.log(userId)
     db.province.findAll()
     .then((provinces) => {
         res.render("tips/new", { provinces: provinces })
@@ -17,7 +19,7 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 // CREATE - add new tip by currentUser
 router.post("/new/:id", isLoggedIn, (req, res) => {
-    let userId = req.params.id
+    let userId = db.user.findByPk(req.user.id)
     db.tip.create({
         username: req.body.username,
         provinceName: req.body.provinceName,
@@ -27,12 +29,27 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
         provinceId: req.body.provinceId,
     })
     .then((createdTip) => {
-        res.redirect(`home/${userId}`)
+        res.redirect(`show/${userId}`)
     })
     .catch((err) => {
         console.log("errrrrrrrr!!!", err)
     })
 })
+
+// GET /show/:id - display the user and their tips
+router.get("/show/:id", isLoggedIn, (req, res) => {
+    db.user.findOne({
+        include: [db.tip],
+        where: { userId: req.params.id },
+    })
+    .then((user) => {
+    res.render('/show', { user: user })
+    })
+    .catch((error) => {
+        console.log("errrrrrrr!!!!:", error)
+    })
+})
+
 
 // // post route for creating comments
 // router.post('/:id/comments', (req, res) => {
@@ -47,20 +64,6 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
 //       res.redirect(`/articles/${articleId}`)
 //     }).catch(error => {
 //       console.log(error)
-//     })
-// })
-
-// // GET /show/:id - display the user and their tips
-// router.get("/show/:id", isLoggedIn, async (req, res) => {
-//     db.user.findOne({
-//         include: [db.tip],
-//         where: { id: req.params.id },
-//     })
-//     .then((user) => {
-//     res.render('/show', { user: user })
-//     })
-//     .catch((error) => {
-//         console.log("errrrrrrr!!!!:", error)
 //     })
 // })
 

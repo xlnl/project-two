@@ -21,12 +21,12 @@ router.get("/index", isLoggedIn, (req, res) => {
 // READ - shows more info about a province and their tips (if any)
 router.get("/:id", isLoggedIn, (req, res) => {
     db.province.findOne({
-        where: { provinceId: req.params.id },
-        include: [db.province, db.tip]
+        where: { id: req.params.id },
+        include: [db.tip]
     })
-    .then((tip) => {
-        if (!tip) throw Error()
-        res.render("home/index", {tip:tip})
+    .then((province) => {
+        if (!province) throw Error()
+        res.render("home/show", {province: province})
     })
     .catch((error) => {
       console.log("errrrrrrr!!!!:", error)

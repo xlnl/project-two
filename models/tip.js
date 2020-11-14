@@ -41,14 +41,14 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'tip', 
   });
 
-  tip.addHook('beforeCreate', (pendingTip, options, cb)=>{
-    geocoder.geocode(tip.address, function(err, data) {
-      if(err) return cb(err, null);
-      tip.lat = data.results[0].geometry.location.lat;
-      tip.lng = data.results[0].geometry.location.lng;
-      cb(null, tip);
-    })
-  })
+  // tip.addHook('beforeCreate', (pendingTip, options, cb)=>{
+  //   geocoder.geocode(tip.address, function(err, data) {
+  //     if(err) return cb(err, null);
+  //     tip.lat = data.results[0].geometry.location.lat;
+  //     tip.lng = data.results[0].geometry.location.lng;
+  //     cb(null, tip);
+  //   })
+  // })
 
   return tip;
 }

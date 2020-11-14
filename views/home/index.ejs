@@ -9,17 +9,6 @@
   </div>
 <% }) %>
 
-<% if(provinces && provinces.tips) { %>
-  <% provinces.tips.forEach((province,tip) => { %>
-    <div>
-      <h3>
-        <a href="/home/<%= province.id %>/<%= tip.id %>"><%= tip.description%></a>
-      </h3>
-    </div>
-  <% }) %>
-<% } else { %>
-<h3>No tips from a province yet!</h3>
-<% } %>
 
 <!-- MAPS API RENDERING HERE -->
 <!-- comment form here -->

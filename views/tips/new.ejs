@@ -1,13 +1,7 @@
 <h1>GOT A TIP?</h1>
 <div>
-    <form method="POST" action="/tips">
+    <form method="POST" action="/tips/new/<%= currentUser.id %>">
         <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum </p>
-        <label for="user">User</label>
-        <select name="userId" id="user" required>
-            <% users.forEach(function(user) { %>
-              <option value="<%= user.id %>"><%= user.getFullName() %></option>
-            <% }) %>
-        </select>
         <label for="province">Province</label>
         <select name="provinceId" required>
             <% provinces.forEach(function(province) { %>
@@ -24,4 +18,3 @@
         <input type="submit" value="Send">
     </form>
 </div>
-
