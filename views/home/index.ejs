@@ -1,16 +1,16 @@
 <h2>WELCOME, <%= currentUser.firstName %></h2>
 <h2>Provinces</h2>
 
-<% provinces.forEach((province) { %>
-  <div></div>
-    <h2>
+<% provinces.forEach((province) => { %>
+  <div>
+    <h3>
       <a href="/home/<%= province.id %>"><%= province.name %></a>
-    </h2>
+    </h3>
   </div>
 <% }) %>
 
-<% if(province && province.tips) { %>
-  <% province.tips.forEach((tip) => { %>
+<% if(provinces && provinces.tips) { %>
+  <% provinces.tips.forEach((province,tip) => { %>
     <div>
       <h3>
         <a href="/home/<%= province.id %>/<%= tip.id %>"><%= tip.description%></a>

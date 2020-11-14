@@ -4,20 +4,35 @@ const db = require('../models')
 const passport = require("../config/ppConfig.js")
 const isLoggedIn = require("../middleware/isLoggedIn")
 
-// home route - 
+// HOME ROUTES
+
 // displays list of provinces in central region of vn + links to all tips from that province
 // (stretch) displays comment section for users to read other comments about a certain tip with the option to add, edit, and delete their own comments
-router.get("/", isLoggedIn, (req, res) => {
-    db.province.findAll({
-        include: [db.tip]
-    })
-    .then((tips) => {
-    res.render("/home/index", {tips: tips})    
+router.get("/index", isLoggedIn, (req, res) => {
+    db.province.findAll()
+    .then((provinces) => {
+    res.render("home/index", {provinces: provinces})    
     })
     .catch((err) => {
     console.log("errrrrrrrrrrrrrrrr!!!!:", err)
     })
 })
+
+// READ - shows more info about a province and their tips (if any)
+router.get("/:id", isLoggedIn, (req, res) => {
+    db.province.findOne({
+        where: { provinceId: req.params.id },
+        include: [db.province, db.tip]
+    })
+    .then((tip) => {
+        if (!tip) throw Error()
+        res.render("home/index", {tip:tip})
+    })
+    .catch((error) => {
+      console.log("errrrrrrr!!!!:", error)
+    })
+})
+
 
 // // post route for creating comments
 // router.post("/:id", isLoggedIn, (req, res) => {
@@ -33,23 +48,6 @@ router.get("/", isLoggedIn, (req, res) => {
 //     }).catch(error => {
 //       console.log("errrrrrrrrr!!!!!!:", error)
 //     //   res.status(400).render('main/404')
-//     })
-// })
-
-// // READ - shows more info about one tip
-// router.get("/:id", isLoggedIn, (req, res) => {
-//   db.tip.findOne({
-//       where: { id: req.params.id },
-//       include: [db.user, db.comment]
-//     })
-//     .then((tip) => {
-//       if (!tip) throw Error()
-//       console.log(tip.username)
-//       console.log(tip.comments)
-//       res.render("/tips/show", {tip})
-//     })
-//     .catch((error) => {
-//       console.log("errrrrrrr!!!!:", error)
 //     })
 // })
 

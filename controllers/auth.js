@@ -53,7 +53,7 @@ router.get('/login', (req, res)=>{
 
 router.post('/login', passport.authenticate("local", {
     failureRedirect: "/auth/login",
-    successRedirect: "/home",
+    successRedirect: "/home/index",
     failureFlash: "Invalid username and/or password.",
     successFlash: "You are now logged in."
     })
@@ -62,7 +62,7 @@ router.post('/login', passport.authenticate("local", {
 router.get("/logout", (req, res)=>{
     req.logout() //! -> flash 
     req.flash("success", "Success! You're logged out.")
-    res.redirect("/home")
+    res.redirect("/home/index")
 })
 
 module.exports = router

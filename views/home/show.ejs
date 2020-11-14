@@ -1,0 +1,14 @@
+<% if(user && user.tips) { %>
+    <% user.tips.forEach((tip) => { %>
+        <div>
+        <h3>
+            <a href="/tips/show/<%= tip.id %>"><%= tip.description %></a>
+        </h3>
+        </div>
+    <% }) %>
+<% } else { %>
+<h3>No tips yet!</h3>
+<% } %>
+
+
+<a href="/home/index">&larr; Back Home</a>
