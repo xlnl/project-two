@@ -4,7 +4,13 @@ const db = require('../models')
 const passport = require("../config/ppConfig.js")
 
 router.get('/signup', (req, res)=>{
-    res.render('auth/signup')
+    db.province.findAll()
+    .then((provinces) => {
+        res.render('auth/signup', { provinces: provinces})
+    })
+    .catch((err) => {
+        console.log("errrrrrrr!!!:", err)
+    })
 })
 
 router.post('/signup', (req, res)=>{

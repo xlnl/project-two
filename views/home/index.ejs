@@ -1,0 +1,25 @@
+<h2>WELCOME, <%= currentUser.firstName %></h2>
+<h2>Provinces</h2>
+
+<% provinces.forEach((province) { %>
+  <div></div>
+    <h2>
+      <a href="/home/<%= province.id %>"><%= province.name %></a>
+    </h2>
+  </div>
+<% }) %>
+
+<% if(province && province.tips) { %>
+  <% province.tips.forEach((tip) => { %>
+    <div>
+      <h3>
+        <a href="/home/<%= province.id %>/<%= tip.id %>"><%= tip.description%></a>
+      </h3>
+    </div>
+  <% }) %>
+<% } else { %>
+<h3>No tips from a province yet!</h3>
+<% } %>
+
+<!-- MAPS API RENDERING HERE -->
+<!-- comment form here -->

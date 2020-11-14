@@ -19,7 +19,11 @@
         <input type="text" name="phone" id="new-number">
         <br>
         <label for="new-province">Province</label>
-        <input type="text" name="provinceName" id="new-province">
+        <select name="provinceName" id="province" required>
+            <% provinces.forEach(function(province) { %>
+              <option value="<%= province.name %>"><%= province.name %></option>
+            <% }) %>
+          </select>
         <br>
         <label for="new-city">City</label>
         <input type="text" name="city" id="new-city">
