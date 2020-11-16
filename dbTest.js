@@ -1,4 +1,20 @@
+require('dotenv').config()
 var db = require('./models')
+const express = require('express')
+const router = express.Router()
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({ accessToken: process.env.ACCESS_TOKEN });
+
+geocodingClient
+  .forwardGeocode({
+    query: 'Quang tri, vn'
+  })
+  .send()
+  .then(response => {
+    const match = response.body;
+    console.log(match);
+  });
+
 
 
 // db.user.create({
@@ -31,3 +47,5 @@ var db = require('./models')
 //     // by using eager loading, the article model should have a comments key
 //     console.log(tip.user)
 //   })
+
+module.exports = router

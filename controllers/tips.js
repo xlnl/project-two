@@ -1,8 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../models')
-const passport = require("../config/ppConfig.js")
 const isLoggedIn = require("../middleware/isLoggedIn")
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({ accessToken: process.env.ACCESS_TOKEN });
+
 
 // GET /tips/new - show form to create new tip for currentUser
 router.get("/new/:id", isLoggedIn, (req, res) => {
@@ -16,6 +18,7 @@ router.get("/new/:id", isLoggedIn, (req, res) => {
         console.log("errrrrrrrr!!!", err)
     })
 })
+
 
 // CREATE - add new tip by currentUser
 router.post("/new/:id", isLoggedIn, (req, res) => {
