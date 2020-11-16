@@ -33,22 +33,38 @@ router.get("/:id", isLoggedIn, (req, res) => {
     })
 })
 
+// GET /home/tip - list more info about a tip + show form to create new comment for a tip 
+router.get("/tip/:id", isLoggedIn, (req, res) => {
+    db.tip.findOne({
+        where: {id: req.params.id},
+        include: [db.comment] 
+    })
+    .then((tip) => {
+        if (!tip) throw Error()
+        console.log(tip.userId)
+        console.log(tip.comments)
+        res.render("home/tip", { tip: tip })
+    })
+    .catch((err) => {
+        console.log("errrrrrrrr!!!", err)
+    })
+})
 
-// // post route for creating comments
-// router.post("/:id", isLoggedIn, (req, res) => {
-//     let tipId = req.params.id;
-//     console.log(req.body);
-//     db.comment.create({
-//       name: req.body.name,
-//       content: req.body.content,
-//       tipId: tipId
-//     })
-//     .then(() => {
-//       res.redirect(`/home/${tipId}`)
-//     }).catch(error => {
-//       console.log("errrrrrrrrr!!!!!!:", error)
-//     //   res.status(400).render('main/404')
-//     })
-// })
+// post route for creating comments
+router.post("/tip/:id/comments", isLoggedIn, (req, res) => {
+    let tipId = req.params.id;
+    console.log(req.body);
+    db.comment.create({
+      name: req.body.name,
+      content: req.body.content,
+      tipId: tipId
+    })
+    .then(() => {
+      res.redirect(`/home/${tipId}`)
+    }).catch(error => {
+      console.log("errrrrrrrrr!!!!!!:", error)
+    //   res.status(400).render('main/404')
+    })
+})
 
 module.exports = router

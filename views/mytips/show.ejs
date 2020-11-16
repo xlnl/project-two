@@ -8,7 +8,10 @@
                 <br>
                 Tip Description: <%= tip.description %>
                 <br>
-                <small>Located in: <%= tip.address %></small> 
+                <small>Located in: <%= tip.address %></small>
+                <form method="POST" action="/tips/show/<%= tip.id %>/?_method=DELETE">
+                    <input type="submit" value="Delete">
+                </form> 
             </h3>
         </div>
     <% }) %>

@@ -4,9 +4,9 @@
         <h3>
             Tip Id: <%= tip.id %> . 
             <br>
-            Tip Description: <%= tip.description %>
+            <small>Located in: <%= tip.address %></small>
             <br>
-            <small>Located in: <%= tip.address %></small> 
+            <a href="/home/tip/<%= tip.id %>">More</a> 
         </h3>
       </div>
     <% }) %>

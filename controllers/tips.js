@@ -37,22 +37,53 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
     })
 })
 
-// GET /show/:id - display the user and their tips
+// GET /show/:id - display the user's tips
 router.get("/show/:id", isLoggedIn, (req, res) => {
     db.user.findOne({
         include: [db.tip],
         where: { id: req.params.id },
     })
     .then((user) => {
-    console.log(user.tips)
-    res.render(`mytips/show`, { user })
+        console.log(user.tips)
+        res.render("mytips/show", { user })
     })
     .catch((err) => {
         console.log("errrrrrrr!!!!:", err)
     })
 })
 
+// GET /edit/:id - update user's tips
+router.get("/edit/:id", isLoggedIn, (req, res) => {
+    db.tip.findOne({
+        include: [db.user],
+        where: { id: req.params.id },
+    })
+    .then((tip) => {
+        console.log("THIS IS THE TIP:", tip)
+        if(tip.dataValues.userId === req.user.id) {
+            res.render(`mytips/update`, { tip: tip })
+        } else {
+            res.redirect("/home/index")
+        }
+    })
+    .catch((err) => {
+        console.log("errrrrrrr!!!!:", err)
+    })
+})
 
-
+// GET /show/:id - delete user's tips
+router.delete("/show/:id", isLoggedIn, (req, res) => {
+    let tipId = req.params.id
+    db.tip.destroy({
+        include: [db.user],
+        where: { id: tipId, userId: req.params.id },
+    })
+    .then((tip) => {
+        res.redirect(`/home/index`)
+    })
+    .catch((err) => {
+        console.log("errrrrrrr!!!!:", err)
+    })
+})
 
 module.exports = router
