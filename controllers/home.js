@@ -60,7 +60,7 @@ router.post("/tip/:id/comments", isLoggedIn, (req, res) => {
       tipId: tipId
     })
     .then(() => {
-      res.redirect(`/home/${tipId}`)
+      res.redirect(`/home/tip/${tipId}`)
     }).catch(error => {
       console.log("errrrrrrrrr!!!!!!:", error)
     //   res.status(400).render('main/404')

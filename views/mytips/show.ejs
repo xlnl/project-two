@@ -9,6 +9,7 @@
                 Tip Description: <%= tip.description %>
                 <br>
                 <small>Located in: <%= tip.address %></small>
+                <a href="/tips/edit/<%= tip.id %>">Edit Tip</a>
                 <form method="POST" action="/tips/show/<%= tip.id %>/?_method=DELETE">
                     <input type="submit" value="Delete">
                 </form> 

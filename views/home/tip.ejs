@@ -5,7 +5,7 @@
 <!-- comment form here -->
 <h4>Comment here:</h4>
 
-<form action="/home/<%= tip.id %>/comments" method="POST">
+<form action="/home/tip/<%= tip.id %>/comments" method="POST">
   <div>
     <label for="commenter">Name</label>
     <input type="text" class="form-control" id="commenter" name="name" required>
@@ -19,9 +19,6 @@
   <input type="submit" class="btn btn-primary" value="Comment">
 </form>
 
-
-<a href="/home/index">&larr; Back Home</a>
-
 <h4>Comments</h4>
 <% if(tip.comments.length > 0) { %>
   <% tip.comments.forEach(comment => { %>
@@ -32,4 +29,4 @@
   <% }); %>
 <% } %>
 
-<hr />
+<a href="/home/index">&larr; Back Home</a>

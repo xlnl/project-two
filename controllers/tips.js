@@ -55,13 +55,13 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
 // GET /edit/:id - update user's tips
 router.get("/edit/:id", isLoggedIn, (req, res) => {
     db.tip.findOne({
-        include: [db.user],
+        include: [db.user, db.province],
         where: { id: req.params.id },
     })
     .then((tip) => {
         console.log("THIS IS THE TIP:", tip)
         if(tip.dataValues.userId === req.user.id) {
-            res.render(`mytips/update`, { tip: tip })
+            res.render(`mytips/edit`, { tip: tip , province: province})
         } else {
             res.redirect("/home/index")
         }
