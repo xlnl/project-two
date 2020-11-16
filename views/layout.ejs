@@ -13,6 +13,7 @@
               <% if (!currentUser) { %>
                 <li><a href="/auth/login">Log In</a></li>
               <% } else { %>
+                <li><a href="/home/index">Home</a></li>
                 <li><a href="/tips/show/<%= currentUser.id %>">My Tips</a></li>
                 <li><a href="/tips/new/<%= currentUser.id %>">NEW TIP</a></li>
               <% } %>

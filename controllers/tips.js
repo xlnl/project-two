@@ -6,11 +6,11 @@ const isLoggedIn = require("../middleware/isLoggedIn")
 
 // GET /tips/new - show form to create new tip for currentUser
 router.get("/new/:id", isLoggedIn, (req, res) => {
-    let userId = db.user.findByPk(req.user.id)
+    let userId = req.user.id
     console.log(userId)
     db.province.findAll()
     .then((provinces) => {
-        res.render("tips/new", { provinces: provinces })
+        res.render("mytips/new", { provinces: provinces })
     })
     .catch((err) => {
         console.log("errrrrrrrr!!!", err)
@@ -19,17 +19,18 @@ router.get("/new/:id", isLoggedIn, (req, res) => {
 
 // CREATE - add new tip by currentUser
 router.post("/new/:id", isLoggedIn, (req, res) => {
-    let userId = db.user.findByPk(req.user.id)
+    let id = req.user.id
     db.tip.create({
         username: req.body.username,
         provinceName: req.body.provinceName,
         address: req.body.address,
         description: req.body.description,
-        userId: userId,
+        userId: id,
         provinceId: req.body.provinceId,
     })
     .then((createdTip) => {
-        res.redirect(`show/${userId}`)
+        console.log("Here's the created tip:", createdTip)
+        res.redirect("/home/index")
     })
     .catch((err) => {
         console.log("errrrrrrrr!!!", err)
@@ -40,67 +41,18 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
 router.get("/show/:id", isLoggedIn, (req, res) => {
     db.user.findOne({
         include: [db.tip],
-        where: { userId: req.params.id },
+        where: { id: req.params.id },
     })
     .then((user) => {
-    res.render('/show', { user: user })
+    console.log(user.tips)
+    res.render(`mytips/show`, { user })
     })
-    .catch((error) => {
-        console.log("errrrrrrr!!!!:", error)
+    .catch((err) => {
+        console.log("errrrrrrr!!!!:", err)
     })
 })
 
 
-// // post route for creating comments
-// router.post('/:id/comments', (req, res) => {
-//     let articleId = req.params.id;
-//     console.log(req.body);
-//     db.comment.create({
-//       name: req.body.name,
-//       content: req.body.content,
-//       articleId: articleId
-//     })
-//     .then(() => {
-//       res.redirect(`/articles/${articleId}`)
-//     }).catch(error => {
-//       console.log(error)
-//     })
-// })
-
-// // READ - shows more info about one tip
-// router.get("/show/:id/:tipId", isLoggedIn, (req, res) => {
-//     db.tip.findOne({
-//         where: { 
-//             id: req.params.userId,
-//             tipId: req.params.id,
-//         },
-//         include: [db.user, db.tip]
-//       })
-//       .then((tip) => {
-//         if (!tip) throw Error()
-//         res.render("tips/show", {tip})
-//       })
-//       .catch((error) => {
-//         console.log("errrrrrrr!!!!:", error)
-//       })
-// })
-
-
-// // post route for creating comments
-// router.post('/show/:id/comments', (req, res) => {
-//     let tipId = req.params.id;
-//     console.log(req.body);
-//     db.comment.create({
-//       name: req.body.name,
-//       content: req.body.content,
-//       tipId: tipId
-//     })
-//     .then(() => {
-//       res.redirect(`/show/${tipId}`)
-//     }).catch(error => {
-//       console.log("errrrrrrrrr!!!!!!:", error)
-//     })
-// })
 
 
 module.exports = router

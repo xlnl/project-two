@@ -2,13 +2,18 @@
     <% province.tips.forEach((tip) => { %>
       <div>
         <h3>
-          <a href="/home/<%= province.id %>/<%= tip.id %>"><%= tip.description%></a>
+            Tip Id: <%= tip.id %> . 
+            <br>
+            Tip Description: <%= tip.description %>
+            <br>
+            <small>Located in: <%= tip.address %></small> 
         </h3>
       </div>
     <% }) %>
-  <% } else { %>
-  <h3>No tips from a province yet!</h3>
-  <% } %>
+<% } else { %>
+<h3>No tips from a province yet!</h3>
+<% } %>
+
 
 
 <a href="/home/index">&larr; Back Home</a>

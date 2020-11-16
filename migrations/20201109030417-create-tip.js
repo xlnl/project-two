@@ -8,8 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING
+      userId: {
+        type: Sequelize.INTEGER
+      },
+      provinceId: {
+        type: Sequelize.INTEGER
       },
       address: {
         type: Sequelize.STRING,
@@ -19,12 +22,6 @@ module.exports = {
       },
       lng: {
         type: Sequelize.FLOAT,
-      },
-      provinceName: {
-        type: Sequelize.STRING
-      },
-      userId: {
-        type: Sequelize.INTEGER
       },
       description: {
         type: Sequelize.TEXT

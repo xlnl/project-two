@@ -32,7 +32,7 @@ router.post('/signup', (req, res)=>{
         if(wasCreated){
             console.log(`just created the following user:`, createdUser)
             passport.authenticate("local", {
-                successRedirect: "/home",
+                successRedirect: "/home/index",
                 successFlash: "Account created and logged in!"
             })(req, res) // IIFE = immediate invoked function
         } else {
