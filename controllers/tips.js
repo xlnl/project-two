@@ -5,19 +5,6 @@ const isLoggedIn = require("../middleware/isLoggedIn")
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: process.env.ACCESS_TOKEN });
 
-// let lat = document.getElementById('lat').textContent
-// let long = document.getElementById('long').textContent
-// mapboxgl.accessToken = '<%= mapkey %>';
-// let map = new mapboxgl.Map({
-//     container: 'map', // container id
-//     style: 'mapbox://styles/mapbox/streets-v11',
-//     center: [long, lat], // starting position
-//     zoom: 10 // starting zoom
-// });
-// // document.getElementById('map').addEventListener('click', new mapboxgl.Marker())
-// let marker = new mapboxgl.Marker() // initialize a new marker
-// .setLngLat([long, lat]) // Marker [lng, lat] coordinates
-// .addTo(map); // Add the marker to the map
 
 // GET /tips/new - show form to create new tip for currentUser
 router.get("/new/:id", isLoggedIn, (req, res) => {
@@ -36,16 +23,14 @@ router.get("/new/:id", isLoggedIn, (req, res) => {
 // CREATE - add new tip by currentUser
 router.post("/new/:id", isLoggedIn, (req, res) => {
     let id = req.user.id
-    // fetch lng/lat
-    // add lng & lat 
+    // STRETCH GOAL - fetch lng/lat
+    // STRETCH GOAL - add lng & lat 
     db.tip.create({
         username: req.body.username,
         provinceName: req.body.provinceName,
         address: req.body.address,
         description: req.body.description,
         userId: id,
-        lng: lng,
-        lat: lat,
         provinceId: req.body.provinceId,
     })
     .then((createdTip) => {
@@ -72,7 +57,7 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
     })
 })
 
-// GET /edit/:id - update user's tips
+// PUT /edit/:id - update user's tips
 router.put("/edit/:id", isLoggedIn, (req, res) => {
     db.province.findAll()
     .then(()=> {
@@ -94,6 +79,7 @@ router.put("/edit/:id", isLoggedIn, (req, res) => {
     })
 })
 
+// GET /edit/:id - shows the edit tip form
 router.get("/edit/:id", isLoggedIn, (req, res) => {
     db.province.findAll()
     .then(([tip, province]) => {
@@ -124,5 +110,18 @@ router.delete("/show/tip/:id", isLoggedIn, (req, res) => {
         console.log("errrrrrrr!!!!:", err)
     })
 })
+// let lat = document.getElementById('lat').textContent
+// let long = document.getElementById('long').textContent
+// mapboxgl.accessToken = '<%= mapkey %>';
+// let map = new mapboxgl.Map({
+//     container: 'map', // container id
+//     style: 'mapbox://styles/mapbox/streets-v11',
+//     center: [long, lat], // starting position
+//     zoom: 10 // starting zoom
+// });
+// // document.getElementById('map').addEventListener('click', new mapboxgl.Marker())
+// let marker = new mapboxgl.Marker() // initialize a new marker
+// .setLngLat([long, lat]) // Marker [lng, lat] coordinates
+// .addTo(map); // Add the marker to the map
 
 module.exports = router

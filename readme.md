@@ -90,15 +90,14 @@ npm i
 ```
 sequelize db:create <insert db name here>
 ```
-5. Seed all the provinces
-```
-sequelize db:seed:all
-```
-6. Migrate the `user` model to your database
+5. Migrate the `user` model to your database
 ```
 sequelize db:migrate
 ```
-
+6. Seed all the provinces
+```
+sequelize db:seed:all
+```
 7. Add `SESSION_SECRET` and `PORT` environment variables in a `.env` file (can be any string). If planning to use a maps API, make sure you put that as an environment variable as well.
 
 

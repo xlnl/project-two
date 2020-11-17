@@ -8,9 +8,9 @@
                 <p>Sending a tip will inform administrators about a possible UXO threat close to the address and within the province submitted. <br><br> For more details on how MAG International regional officers collaborate with community liaisons near you, please visit <a href="https://www.maginternational.org/what-we-do/risk-education/">here.</a></p>
                 <div class="form-group col-md-6">
                     <label for="new-province">Province</label>
-                    <select name="provinceName" class="form-control" id="province" required>
+                    <select name="provinceId" class="form-control" id="province" required>
                         <% provinces.forEach(function(province) { %>
-                        <option value="<%= province.name %>"><%= province.name %></option>
+                        <option value="<%= province.id %>"><%= province.name %></option>
                         <% }) %>
                     </select>
                 </div>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="description">Description</label>
-                    <textarea type="text" class="form-control" name="description" id="new-password">What does it look like? Let us know!</textarea>
+                    <textarea type="text" class="form-control" name="description" id="description">What does it look like? Let us know!</textarea>
                 </div>
                 <br><br>
             </div>

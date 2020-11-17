@@ -4,6 +4,7 @@ const db = require('../models')
 const isLoggedIn = require("../middleware/isLoggedIn")
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
+
 // HOME ROUTES
 
 // displays list of provinces in central region of vn + links to all tips from that province
@@ -11,6 +12,7 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 router.get("/index", isLoggedIn, (req, res) => {
     db.province.findAll()
     .then((provinces) => {
+    
     res.render("home/index", {provinces: provinces})    
     })
     .catch((err) => {
@@ -68,5 +70,22 @@ router.post("/tip/:id/comments", isLoggedIn, (req, res) => {
     //   res.status(400).render('main/404')
     })
 })
+
+// STRETCH GOAL
+// const mapboxUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/Vietnam.json?worldview=cn&access_token=${process.env.ACCESS_TOKEN}`;
+// // Use request to call the API
+// Axios.get(mapboxUrl).then((apiResponse) => {
+    
+//     const provinces = apiResponse.data.features.geometry.coordinates 
+//     res.render('home/index', { provinces: provinces});
+// })
+// });
+// mapboxgl.accessToken = `${process.env.ACCESS_TOKEN}`
+// var map = new mapboxgl.Map({
+// container: 'provincemap',
+// style: 'mapbox://styles/mapbox/streets-v11',
+// center: [16.719220, 107.033283], // starting position
+// zoom: 10 // starting zoom
+// })
 
 module.exports = router

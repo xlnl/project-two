@@ -8,8 +8,6 @@ const flash = require("connect-flash")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
-
 
 // body parser middleware to make req.body work
 app.use(express.urlencoded({extended: true}))

@@ -86,8 +86,8 @@ body {
 }
 .welcome-user {
     order: 0;
-    width: 500px;
-    align-self: flex-start
+    align-self: flex-start;
+    margin: auto;
 }
 #province-title {
     margin: 10px auto;
@@ -146,5 +146,9 @@ body {
 }
 #home-link {
     margin: 10 auto;
+
+}
+#provincemap {
+    width: 500px;
 
 }
