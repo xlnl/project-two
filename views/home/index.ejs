@@ -1,16 +1,25 @@
-<div>
-  <h2 class="text-uppercase">WELCOME, <%= currentUser.firstName %></h2>
-  <h2>Provinces</h2>
-</div>
-
-<% provinces.forEach((province) => { %>
-  <div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title"><%= province.name %></h5>
-        <a href="/home/<%= province.id %>" class="card-link">More</a>
+<br><br>
+<div id="home-page">
+  <div id="title" class="welcome-user">
+    <h2 class="text-uppercase">WELCOME, <%= currentUser.firstName %></h2>
+  </div>
+  <div class="container" id="home-index">
+    <div class="province-container row" id="province-title">    
+      <h2 id="subtitle">Provinces</h2>
+    </div>
+    <div class="province-container row">
+      <% provinces.forEach((province) => { %>
+        <div class="card" style="width: 10rem;">
+          <div class="card-body province-list">
+              <h5 class="card-title card-link">
+                <a href="/home/<%= province.id %>"><%= province.name %></a>
+              </h5>
+          </div>
+        </div>
+      <% }) %>
     </div>
   </div>
-<% }) %>
+</div>
 
 
 <!-- MAPS API RENDERING HERE -->

@@ -1,10 +1,10 @@
-<div>
+<div id="provincetips">
     <% if(province && province.tips) { %>
         <% province.tips.forEach((tip) => { %>
-            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-warning mb-3 shadow-sm p-3 mb-5 rounded" id="provincetip" style="max-width: 18rem;">
                 <h4 class="card-title">Tip Id: <%= tip.id %>.</h4> 
                 <h5 class="card-subtitle mb-2 text-muted">Located in: <%= tip.address %></h5>
-                <button class="btn btn-info" onclick="document.location='/home/tip/<%= tip.id %>'">More</button> 
+                <button class="btn btn-danger" onclick="document.location='/home/tip/<%= tip.id %>'">Read More</button> 
         </div>
         <div id="tipmap"></div>
         <% }) %>

@@ -1,36 +1,46 @@
-<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-    <div class="card-header">Tip Id: <%= tip.id %></div>
-    <div class="card-body">
-      <h5 class="card-title">Located in: <%= tip.address %></h5>
-      <p class="card-text">Tip Description: <%= tip.description %></p>
+<div>
+    <div id="infotip">
+        <div class="card mb-3 shadow-sm p-3 mb-5 rounded container-sm" style="max-width: 18rem;">
+            <div class="card-header bg-warning text-white ">Tip Id: <%= tip.id %></div>
+            <div class="card-body">
+            <h5 class="card-title">Located in: <br><%= tip.address %></h5>
+            <p class="card-text"><strong>Tip Description:</strong><br> <%= tip.description %></p>
+            </div>
+        </div>
+
+        <!-- comment form here -->
+        <div id="comment">
+            <div class="container-sm">
+                <h5>Do you have more details? Let us know:</h5>
+                <div>
+                    <form action="/home/tip/<%= tip.id %>/comments" method="POST">
+                        <div class="form-group">
+                        <label for="commenter">Name</label>
+                        <input type="text" class="form-control" id="commenter" name="name" required>
+                        </div>
+                        <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea type="text" class="form-control" id="content" name="content" required></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Comment">
+                    </form>
+                </div>
+                <br>
+                <div class="card">
+                    <h5>Comments</h5>
+                    <% if(tip.comments.length > 0) { %>
+                    <% tip.comments.forEach(comment => { %>
+                        <div id="comments">
+                            <p><strong><%= comment.name %> says:</strong></p>
+                            <p>"<%= comment.content %>"</p>
+                        </div>
+                    <% }); %>
+                    <% } %>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div id="home-link">
+        <a href="/home/index">&larr; Back Home</a>
     </div>
 </div>
-
-<!-- comment form here -->
-<h4>Comment here:</h4>
-
-<form action="/home/tip/<%= tip.id %>/comments" method="POST">
-  <div>
-    <label for="commenter">Name</label>
-    <input type="text" class="form-control" id="commenter" name="name" required>
-  </div>
-
-  <div>
-    <label for="content">Content</label>
-    <textarea type="text" class="form-control" id="content" name="content" required></textarea>
-  </div>
-
-  <input type="submit" class="btn btn-primary" value="Comment">
-</form>
-
-<h4>Comments</h4>
-<% if(tip.comments.length > 0) { %>
-  <% tip.comments.forEach(comment => { %>
-    <div>
-      <p><strong><%= comment.name %> says:</strong></p>
-      <p><%= comment.content %></p>
-    </div>
-  <% }); %>
-<% } %>
-
-<a href="/home/index">&larr; Back Home</a>

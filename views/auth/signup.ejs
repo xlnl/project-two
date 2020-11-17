@@ -1,48 +1,53 @@
-<div class="container-sm">
-    <h1>MINES SWEEPER</h1>
-    <h2>Sign Up</h2>
+<div class="signup">
+    <div class="container-sm">
+        <div id="logo">
+            <h1>MINES SWEEPER</h1>
+        </div>  
+        <h2>Join the community.</h2>
+    </div>
+    <div class="container-sm">
+        <form method="POST" action="/auth/signup">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="new-firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="new-firstName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="new-lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="new-lastName">
+                </div> 
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="new-username">Username</label>
+                    <input type="text" class="form-control" name="username" id="new-username">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="new-password">Password</label>
+                    <input type="password" class="form-control" name="password" id="new-password">
+                </div> 
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="new-number">Phone Number</label>
+                    <input type="text" class="form-control" name="phone" id="new-number">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="new-province">Province</label>
+                    <select name="provinceName" class="form-control" id="province" required>
+                        <% provinces.forEach(function(province) { %>
+                        <option value="<%= province.name %>"><%= province.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="new-city">City</label>
+                    <input type="text" name="city" class="form-control" id="new-city">
+                </div> 
+            </div>
+            <div class="text-center">
+                <input type="submit" id="signupbtn" class="btn btn-danger" value="Sign Up">
+            </div>
+        </form>
+    </div>
 </div>
-<div class="container-sm">
-    <form method="POST" action="/auth/signup">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="new-firstName">First Name</label>
-                <input type="text" class="form-control" name="firstName" id="new-firstName">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="new-lastName">Last Name</label>
-                <input type="text" class="form-control" name="lastName" id="new-lastName">
-            </div> 
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="new-username">Username</label>
-                <input type="text" class="form-control" name="username" id="new-username">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="new-password">Password</label>
-                <input type="password" class="form-control" name="password" id="new-password">
-            </div> 
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                <label for="new-number">Phone Number</label>
-                <input type="text" class="form-control" name="phone" id="new-number">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="new-province">Province</label>
-                <select name="provinceName" class="form-control" id="province" required>
-                    <% provinces.forEach(function(province) { %>
-                      <option value="<%= province.name %>"><%= province.name %></option>
-                    <% }) %>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="new-city">City</label>
-                <input type="text" name="city" class="form-control" id="new-city">
-            </div> 
-        </div>
-        <input type="submit" class="btn btn-primary" value="Sign Up">
-    </form>
-</div>
-

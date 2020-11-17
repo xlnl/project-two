@@ -1,22 +1,31 @@
-<div class="container-sm">
-    <h1>MINES SWEEPER</h1>
-    <h2>Log In</h2>
-</div>
-<div class="container-sm">
-    <form method="POST" action="/auth/login">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="auth-username">Username</label>
-                <input type="text" class="form-control" name="username" id="auth-username">
+<div class="login">
+    <div class="container-sm">
+        <div id="logo">
+            <h1>MINES SWEEPER</h1>
+        </div>  
+        <h2>Log In</h2>
+    </div>
+    <div class="container-sm">
+        <form method="POST" action="/auth/login">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="auth-username">Username</label>
+                    <input type="text" class="form-control" name="username" id="auth-username">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="auth-password">Password</label>
+                    <input type="password" class="form-control" name="password" id="auth-password">
+                </div> 
             </div>
-            <div class="form-group col-md-6">
-                <label for="auth-password">Password</label>
-                <input type="password" class="form-control" name="password" id="auth-password">
-            </div> 
-        </div>
-        <div class="form-row">
-            <p >New here?  </p><a href="/auth/signup"> Sign up!</a>
-        </div>
-        <input type="submit" value="Enter">
-    </form>
+            <div class="text-center">
+                <input type="submit" class="btn btn-danger" value="Enter">
+            </div>
+            <div class="form-row">
+                <p>New here?  </p>
+                <div class="form-group">
+                    <a href="/auth/signup"> Sign up!</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

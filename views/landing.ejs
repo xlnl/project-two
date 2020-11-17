@@ -1,20 +1,29 @@
-<div class="card text-center" style="width: 560px">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/B94JZ6WoJ2o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
-    <div class="card-body">
-        <h5 class="card-title">Help Keep Our Communities Safe</h5>
-        <div class="card-text">
-            <p class="font-weight-lighter">
-                The Vietnam War is over but unexploded bombs and cluster munitions remain to this very day, disproportionately affecting the lives of people in areas that were once conflict zones.
-                <br><br>
-                It's a public health, environmental, and economic challenge to growth in Vietnam, among other countries including Nigeria, Laos, Angola, etc.
-                <br><br>
-                This project is contextualized, inspired, and informed by the amazing work that <a href="https://www.maginternational.org/what-we-do/where-we-work/vietnam/">MAG International</a> does through their community liasons in areas contaminated by unexploded bombs.  
-                <br><br>
-                Community liasons, in this capacity, play an integral role in delivering risk education and bomb awareness to the local community. They also inform the public of ways to reach MAG/the authorities when they think they might have seen or encountered a potential bomb. Currently, there is a tip hotline for community members to inform about a possible bomb threat. 
-                <br><br>
-                <strong>Mines Sweeper</strong>, which provides another avenue for users to create tips by way of a web application, will help expand the reach of MAG International (and subsequentially the community members at large) to mitigate and manage harm reduction in their own communities.
-            </p>
+<div id="landing-top" class="row">
+    <div class="card text-center" id="landing-card" style="width: 502px; height: 690px">
+        <iframe width="500" height="281" class="landing-vid" src="https://www.youtube.com/embed/B94JZ6WoJ2o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+        <div class="card-body">
+            <h5 class="card-title" id="landing-title">Help Keep Our Communities Safe</h5>
+            <div class="card-text">
+                <p id="landing-message">
+                    The Vietnam War is over but unexploded bombs and cluster munitions remain to this very day, disproportionately affecting the lives of people in areas that were once conflict zones and challenging Vietnam's path to growth.
+                    <br><br>
+                    Currently, there is great work being done to make sure Vietnam is safer and better situated for economic growth, environmental sustainability, and public health promotion.
+                    Help us ensure that the Central Region of Vietnam is safe for all by submitting helpful tips if you ever encounter a possible bomb fragment or unexploded cluster munition. 
+                    <br><br>
+                    Will you join Mines Sweeper?
+                    <br>
+                </p>
+            </div>
+            <button class="btn btn-danger" onclick="document.location='/auth/signup'">Join</button>
         </div>
-        <button class="btn btn-primary" onclick="document.location='/auth/signup'">Join</button>
+    </div>
+</div>
+<div id="landing-footer" class="row" style="width: 50rem">
+    <div id="landing-info">
+        <p class="font-weight-lighter" id="landing-message">
+            This project is contextualized, inspired, and informed by the amazing work that the <a href="https://www.maginternational.org/what-we-do/where-we-work/vietnam/">Mines Advisory Group International</a> does through their community liaisons in areas contaminated by unexploded bombs. 
+            <br><br>
+            Community liasons, in this capacity, play an integral role in delivering risk education and bomb awareness to the local community. They also inform the public of ways to reach MAG/the authorities when they think they might have seen or encountered a potential bomb. Currently, there is a tip hotline for community members to inform about a possible bomb threat. This project will help fill any possible gaps of coverage within that hotspot. 
+        </p>
     </div>
 </div>
