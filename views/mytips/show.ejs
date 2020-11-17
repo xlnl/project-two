@@ -1,25 +1,24 @@
 <h2><%= currentUser.firstName %>'s Tips</h2>
-
-<% if(user && user.tips) { %>
-    <% user.tips.forEach((tip) => { %>
-        <div>
-            <h3>
-                Tip Id: <%= tip.id %> . 
-                <br>
-                Tip Description: <%= tip.description %>
-                <br>
-                <small>Located in: <%= tip.address %></small>
-                <a href="/tips/edit/<%= tip.id %>">Edit Tip</a>
-                <form method="POST" action="/tips/show/<%= tip.id %>/?_method=DELETE">
-                    <input type="submit" value="Delete">
-                </form> 
-            </h3>
-        </div>
-    <% }) %>
-<% } else { %>
-<h3>No tips yet! <a href="/tips/new/<%= user.id %>"> Make a tip? </a></h3>
-<% } %>
-
-
-
+<div>
+    <% if(user && user.tips) { %>
+        <% user.tips.forEach(tip => { %>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Tip Id: <%= tip.id %>.</h4>
+                    <h5 class="card-subtitle mb-2 text-muted">Located in: <%= tip.address %></h5>
+                    <p class="card-text">Tip Description: <%= tip.description %></p>
+                    <div>
+                        <a href="/tips/edit/<%= tip.id %>" class="card-link, btn btn-info">Edit Tip</a>
+                        <form method="POST" action="/tips/show/tip/<%= tip.id %>/?_method=DELETE">
+                            <input type="submit" value="Delete" class="card-link, btn btn-warning">
+                        </form>
+                    </div> 
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+    <h3>No tips yet! <a href="/tips/new/<%= currentUser.id %>"> Make a tip? </a></h3>
+    <% } %>
+</div>
 <a href="/home/index">&larr; Back Home</a>
+

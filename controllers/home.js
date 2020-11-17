@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('../models')
 const isLoggedIn = require("../middleware/isLoggedIn")
+var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js')
 
 // HOME ROUTES
 
@@ -24,6 +25,7 @@ router.get("/:id", isLoggedIn, (req, res) => {
         include: [db.tip]
     })
     .then((province) => {
+        console.log(province)
         if (!province) throw Error()
         res.render("home/show", {province: province})
     })
@@ -31,6 +33,7 @@ router.get("/:id", isLoggedIn, (req, res) => {
       console.log("errrrrrrr!!!!:", error)
     })
 })
+ 
 
 // GET /home/tip - list more info about a tip + show form to create new comment for a tip 
 router.get("/tip/:id", isLoggedIn, (req, res) => {

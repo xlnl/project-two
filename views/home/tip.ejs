@@ -1,6 +1,10 @@
-<h2>Tip Id: <%= tip.id %> . </h2>
-<small>Located in: <%= tip.address %></small> 
-<p>Tip Description: <%= tip.description %></p>
+<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+    <div class="card-header">Tip Id: <%= tip.id %></div>
+    <div class="card-body">
+      <h5 class="card-title">Located in: <%= tip.address %></h5>
+      <p class="card-text">Tip Description: <%= tip.description %></p>
+    </div>
+</div>
 
 <!-- comment form here -->
 <h4>Comment here:</h4>

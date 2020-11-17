@@ -5,6 +5,19 @@ const isLoggedIn = require("../middleware/isLoggedIn")
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({ accessToken: process.env.ACCESS_TOKEN });
 
+// let lat = document.getElementById('lat').textContent
+// let long = document.getElementById('long').textContent
+// mapboxgl.accessToken = '<%= mapkey %>';
+// let map = new mapboxgl.Map({
+//     container: 'map', // container id
+//     style: 'mapbox://styles/mapbox/streets-v11',
+//     center: [long, lat], // starting position
+//     zoom: 10 // starting zoom
+// });
+// // document.getElementById('map').addEventListener('click', new mapboxgl.Marker())
+// let marker = new mapboxgl.Marker() // initialize a new marker
+// .setLngLat([long, lat]) // Marker [lng, lat] coordinates
+// .addTo(map); // Add the marker to the map
 
 // GET /tips/new - show form to create new tip for currentUser
 router.get("/new/:id", isLoggedIn, (req, res) => {
@@ -23,6 +36,8 @@ router.get("/new/:id", isLoggedIn, (req, res) => {
 // CREATE - add new tip by currentUser
 router.post("/new/:id", isLoggedIn, (req, res) => {
     let id = req.user.id
+    // fetch lng/lat
+    // add lng & lat 
     db.tip.create({
         username: req.body.username,
         provinceName: req.body.provinceName,
@@ -47,7 +62,7 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
         where: { id: req.params.id },
     })
     .then((user) => {
-        console.log(user.tips)
+        console.log(user)
         res.render("mytips/show", { user })
     })
     .catch((err) => {
@@ -56,33 +71,52 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
 })
 
 // GET /edit/:id - update user's tips
-router.get("/edit/:id", isLoggedIn, (req, res) => {
-    db.tip.findOne({
-        include: [db.user, db.province],
-        where: { id: req.params.id },
-    })
-    .then((tip) => {
-        console.log("THIS IS THE TIP:", tip)
-        if(tip.dataValues.userId === req.user.id) {
-            res.render(`mytips/edit`, { tip: tip , province: province})
-        } else {
-            res.redirect("/home/index")
-        }
-    })
+router.put("/edit/:id", isLoggedIn, (req, res) => {
+    db.province.findAll()
+    .then(()=> {
+        db.tip.update({
+            include: [db.user, db.province],
+            where: { id: req.params.id },
+        })
+        .then(([tip, province]) => {
+            console.log("THIS IS THE TIP:", tip)
+            if(tip.dataValues.userId === req.user.id) {
+                res.render(`mytips/edit`, { tip: tip, province: province})
+            } else {
+                res.redirect("/home/index")
+            }
+        })
+    })   
     .catch((err) => {
         console.log("errrrrrrr!!!!:", err)
     })
 })
 
+router.get("/edit/:id", isLoggedIn, (req, res) => {
+    db.province.findAll()
+    .then(([tip, province]) => {
+        console.log("THIS IS THE TIP:", tip)
+        if(tip.dataValues.userId === req.user.id) {
+            res.render(`mytips/edit`, { tip: tip, province: province})
+        } else {
+            res.redirect("/home/index")
+        }
+    })
+    .catch((err) => {
+        console.log("errrrrrrrr!!!", err)
+    })
+})
+
 // GET /show/:id - delete user's tips
-router.delete("/show/:id", isLoggedIn, (req, res) => {
-    let tipId = req.params.id
+router.delete("/show/tip/:id", isLoggedIn, (req, res) => {
+    let userId = req.params.id
     db.tip.destroy({
         include: [db.user],
-        where: { id: tipId, userId: req.params.id },
+        where: { id: req.params.id },
     })
     .then((tip) => {
-        res.redirect(`/home/index`)
+        console.log(tip)
+        res.redirect(`/tips/show/${userId}`)
     })
     .catch((err) => {
         console.log("errrrrrrr!!!!:", err)

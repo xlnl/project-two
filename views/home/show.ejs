@@ -1,19 +1,15 @@
-<% if(province && province.tips) { %>
-    <% province.tips.forEach((tip) => { %>
-      <div>
-        <h3>
-            Tip Id: <%= tip.id %> . 
-            <br>
-            <small>Located in: <%= tip.address %></small>
-            <br>
-            <a href="/home/tip/<%= tip.id %>">More</a> 
-        </h3>
-      </div>
-    <% }) %>
-<% } else { %>
-<h3>No tips from a province yet!</h3>
-<% } %>
+<div>
+    <% if(province && province.tips) { %>
+        <% province.tips.forEach((tip) => { %>
+            <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                <h4 class="card-title">Tip Id: <%= tip.id %>.</h4> 
+                <h5 class="card-subtitle mb-2 text-muted">Located in: <%= tip.address %></h5>
+                <button class="btn btn-info" onclick="document.location='/home/tip/<%= tip.id %>'">More</button> 
+        </div>
+        <div id="tipmap"></div>
+        <% }) %>
+    <% } else { %>
+    <h3>No tips from a province yet!</h3>
+    <% } %>
+</div>
 
-
-
-<a href="/home/index">&larr; Back Home</a>

@@ -1,18 +1,22 @@
-<h1>MINES SWEEPER</h1>
-<h2>Log In</h2>
-<p>lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
-<div>
+<div class="container-sm">
+    <h1>MINES SWEEPER</h1>
+    <h2>Log In</h2>
+</div>
+<div class="container-sm">
     <form method="POST" action="/auth/login">
-        <div>
-            <label for="auth-username">Username</label>
-            <input type="text" name="username" id="auth-username">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="auth-username">Username</label>
+                <input type="text" class="form-control" name="username" id="auth-username">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="auth-password">Password</label>
+                <input type="password" class="form-control" name="password" id="auth-password">
+            </div> 
         </div>
-        <div>
-            <label for="auth-password">Password</label>
-            <input type="password" name="password" id="auth-password">
+        <div class="form-row">
+            <p >New here?  </p><a href="/auth/signup"> Sign up!</a>
         </div>
-        <p>New here?</p> <a href="/auth/signup">Sign up!</a>
-        <br>
         <input type="submit" value="Enter">
     </form>
 </div>

@@ -1,7 +1,10 @@
 body {
     background-color: lavenderblush,
 }
-#map {
-    height:400px;
-    width:100%;
+.card-body {
+    align-content: center;
+}
+
+nav {
+    background-color: rgb(109, 9, 9);
 }
