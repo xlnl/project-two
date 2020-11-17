@@ -44,6 +44,8 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
         address: req.body.address,
         description: req.body.description,
         userId: id,
+        lng: lng,
+        lat: lat,
         provinceId: req.body.provinceId,
     })
     .then((createdTip) => {
