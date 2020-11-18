@@ -27,7 +27,6 @@ router.post("/new/:id", isLoggedIn, (req, res) => {
     // STRETCH GOAL - add lng & lat 
     db.tip.create({
         username: req.body.username,
-        provinceName: req.body.provinceName,
         address: req.body.address,
         description: req.body.description,
         userId: id,
@@ -60,16 +59,24 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
 // PUT /edit/:id - update user's tips
 router.put("/edit/:id", isLoggedIn, (req, res) => {
     db.tip.update({
+        username: req.body.username,
+        address: req.body.address,
+        description: req.body.description,
+        provinceId: req.body.provinceId,
+    },
+    {   where: { id: req.params.id, userId: req.user.id, },
         include: [db.user, db.province],
-        where: { id: req.params.id },
     })
-    .then((tip, provinces) => {
-        console.log("Tip INFO!!!!!!!!!!!!!", tip)
-        if(tip.dataValues.userId === req.user.id) {
-            res.render(`mytips/edit`, { tip: tip, provinces: provinces })
-        } else {
-            res.redirect("/home/index")
-        }
+    .then((tip) => {
+        console.log("Tip INFO!!!!!!!!!!!!!", tip.dataValues.province)
+        db.province.findAll()
+        .then((provinces)=>{
+            if(tip.dataValues.userId === req.user.id) {
+                res.render(`mytips/edit`, { tip: tip, tipProvince: tip.dataValues.province.dataValues, provinces: provinces })
+            } else {
+                res.redirect("/home/index")
+            }
+        })
     })
     .catch((err) => {
         console.log("errrrrrrr!!!!:", err)
@@ -83,12 +90,15 @@ router.get("/edit/:id", isLoggedIn, (req, res) => {
         where: { id: req.params.id },
     })
     .then((tip) => {
-        console.log("Tip INFO!!!!!!!!!!!!!", tip)
-        if(tip.dataValues.userId === req.user.id) {
-            res.render(`mytips/edit`, { tip: tip })
-        } else {
-            res.redirect("/home/index")
-        }
+        console.log("Tip info!!!!!!!!!!!!!", tip.dataValues.province)
+        db.province.findAll()
+        .then((provinces)=>{
+            if(tip.dataValues.userId === req.user.id) {
+                res.render(`mytips/edit`, { tip: tip, tipProvince: tip.dataValues.province.dataValues, provinces: provinces })
+            } else {
+                res.redirect("/home/index")
+            }
+        })
     })
     .catch((err) => {
         console.log("errrrrrrrr!!!", err)

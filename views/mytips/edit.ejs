@@ -5,13 +5,17 @@
   <div class="container-sm">
       <form method="POST" action="/tips/edit/<%= tip.id %>/?_method=PUT">
           <div class="form-row">
-              <p>For more details on how MAG International regional officers collaborate with community liaisons near you, please visit <a href="https://www.maginternational.org/what-we-do/risk-education/">here.</a></p>
+              <p>
+                Have more updates for your tip? 
+                <br><br>
+                For more details on how MAG International regional officers collaborate with community liaisons near you, please visit <a href="https://www.maginternational.org/what-we-do/risk-education/">here.</a>
+              </p>
               <div class="form-group col-md-6">
-                  <label for="new-province">Province</label>
+                  <label for="new-province">Province</label> 
                   <select name="provinceId" class="form-control" id="province" required>
                       <% provinces.forEach(function(province) { %>
-                      <option value="<%= province.id %>"><%= province.name %></option>
-                      <% }) %>
+                        <option value="<%= province.id %>"><%= province.name %></option>
+                      <% }) %> 
                   </select>
               </div>
               <div class="form-group col-md-6">
@@ -24,7 +28,7 @@
               </div>
               <br><br>
           </div>
-          <input type="submit"class="btn btn-warning" value="Send">
+          <input type="submit"class="btn btn-warning" value="Update">
       </form>
   </div>
 </div>
