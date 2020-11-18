@@ -59,21 +59,18 @@ router.get("/show/:id", isLoggedIn, (req, res) => {
 
 // PUT /edit/:id - update user's tips
 router.put("/edit/:id", isLoggedIn, (req, res) => {
-    db.province.findAll()
-    .then(()=> {
-        db.tip.update({
-            include: [db.user, db.province],
-            where: { id: req.params.id },
-        })
-        .then(([tip, province]) => {
-            console.log("THIS IS THE TIP:", tip)
-            if(tip.dataValues.userId === req.user.id) {
-                res.render(`mytips/edit`, { tip: tip, province: province})
-            } else {
-                res.redirect("/home/index")
-            }
-        })
-    })   
+    db.tip.update({
+        include: [db.user, db.province],
+        where: { id: req.params.id },
+    })
+    .then((tip, provinces) => {
+        console.log("Tip INFO!!!!!!!!!!!!!", tip)
+        if(tip.dataValues.userId === req.user.id) {
+            res.render(`mytips/edit`, { tip: tip, provinces: provinces })
+        } else {
+            res.redirect("/home/index")
+        }
+    })
     .catch((err) => {
         console.log("errrrrrrr!!!!:", err)
     })
@@ -81,11 +78,14 @@ router.put("/edit/:id", isLoggedIn, (req, res) => {
 
 // GET /edit/:id - shows the edit tip form
 router.get("/edit/:id", isLoggedIn, (req, res) => {
-    db.province.findAll()
-    .then(([tip, province]) => {
-        console.log("THIS IS THE TIP:", tip)
+    db.tip.findOne({
+        include: [db.user, db.province],
+        where: { id: req.params.id },
+    })
+    .then((tip) => {
+        console.log("Tip INFO!!!!!!!!!!!!!", tip)
         if(tip.dataValues.userId === req.user.id) {
-            res.render(`mytips/edit`, { tip: tip, province: province})
+            res.render(`mytips/edit`, { tip: tip })
         } else {
             res.redirect("/home/index")
         }

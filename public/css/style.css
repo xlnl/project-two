@@ -12,9 +12,16 @@ body {
 .welcome-user {
     width: 50rem;
     justify-content: left;
+    padding: 10px;
+}
+#deletebtn {
+    padding: 5px;
 }
 .navbar {
     background-color: rgb(255, 218, 218);
+}
+#navbar {
+    float: left;
 }
 .login, .signup{
     margin: 10px auto;
@@ -74,7 +81,7 @@ body {
 }
 #logo {
     font-family: 'Archivo Black', sans-serif;
-    font-size: 100px;
+    font-size: 50px;
 }
 #home {
     font-family: 'Archivo Black', sans-serif;
@@ -126,7 +133,7 @@ body {
     align-content: space-evenly;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.219);
 }
-#infotip {
+#infotip, #mytips{
     padding: 20px;
     margin: 10px auto;
     display: flex;

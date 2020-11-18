@@ -1,18 +1,22 @@
-<h2 class="text-uppercase" id="logo"><%= currentUser.firstName %>'s Tips</h2>
+<div id="title" class="welcome-user"></diiv>
+    <h2 class="text-uppercase" id="logo"><%= currentUser.firstName %>'s Tips</h2>
+</div>
 <div id="mytips">
     <% if(user && user.tips) { %>
         <% user.tips.forEach(tip => { %>
             <div id="info" class="card shadow-sm p-3 mb-5 bg-white rounded" style="width: 18rem;">
                 <div class="card-body">
-                    <h4 class="card-title">Tip</h4>
+                    <h4 class="card-title">Tip: <%=tip.id%>.</h4> 
                     <h5 class="card-subtitle mb-2 text-muted">Located in: <%= tip.address %></h5>
                     <p class="card-text">Tip Description: <%= tip.description %></p>
-                    <div>
+                    <div class="container-sm">
                         <a href="/home/tip/<%= tip.id %>/" class="card-link, btn btn-info">More</a>
                         <a href="/tips/edit/<%= tip.id %>" class="card-link, btn btn-info">Edit Tip</a>
-                        <form method="POST" action="/tips/show/tip/<%= tip.id %>/?_method=DELETE">
-                            <input type="submit" value="Delete" class="card-link, btn btn-danger">
-                        </form>
+                        <div id="deletebtn">
+                            <form method="POST" action="/tips/show/tip/<%= tip.id %>/?_method=DELETE">
+                                <input type="submit" value="Delete" class="card-link btn btn-danger">
+                            </form>
+                        </div>
                     </div> 
                 </div>
             </div>
