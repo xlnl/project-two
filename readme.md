@@ -1,6 +1,6 @@
 # Project Two: Mines Sweeper
 
-### App Demo: Click [here!](https://xlnl.github.io/project-two/)
+### App Demo: Click [here!](https://minessweeper.herokuapp.com/)
 ----------------------------------------------
 TW: mention of war, bombs 
 
