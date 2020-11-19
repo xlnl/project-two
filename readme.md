@@ -21,14 +21,14 @@ Currently, there is a tip hotline for community members to inform about a possib
 **Mines Sweeper**, which provides another avenue for users to create tips by way of a web application, will help expand the reach of MAG International (and subsequentially the community members at large) to mitigate and manage harm reduction in their own communities.
 
 ----------------------------------------------------------
-### ERD
-
-Click [here](https://whimsical.com/project-2-erd-KhbbZiC8mwzu58YBH5sGeG) to view the entity-relationship diagram of Mines Sweeper.
-
 ### Wireframes
 
 Click [here](https://whimsical.com/project-2-wireframes-4zHBvk17jQoke5LnQgJLHc) to view the wireframes of Mines Sweeper! 
-----------------------------------------------------------
+
+### ERD 
+
+Click [here](https://whimsical.com/project-2-erd-KhbbZiC8mwzu58YBH5sGeG) to view the entity-relationship diagram of Mines Sweeper.
+
 ### User Stories
 
 1. As a user, I want to be able to send a tip in order to let authorities know of a possible unexploded bomb material. I want to be able to edit my tip in case I can provide additional information. 
