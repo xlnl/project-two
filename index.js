@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
     res.render("landing")
 })
 
-app.listen(process.env.PORT, () => { 
+app.listen(process.env.PORT || 8000, () => { 
     console.log(`You're listening to the bombastic sounds of port ${process.env.PORT}`)
 })
 
