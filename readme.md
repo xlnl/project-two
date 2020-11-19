@@ -25,6 +25,9 @@ Currently, there is a tip hotline for community members to inform about a possib
 
 Click [here](https://whimsical.com/project-2-erd-KhbbZiC8mwzu58YBH5sGeG) to view the entity-relationship diagram of Mines Sweeper.
 
+### Wireframes
+
+Click [here](https://whimsical.com/project-2-wireframes-4zHBvk17jQoke5LnQgJLHc) to view the wireframes of Mines Sweeper! 
 ----------------------------------------------------------
 ### User Stories
 
@@ -36,9 +39,19 @@ Click [here](https://whimsical.com/project-2-erd-KhbbZiC8mwzu58YBH5sGeG) to view
 6. (**Stretch**) As a user, I want to upload an image of the tip through the form.
 
 ----------------------------------------------------------
-### Wireframes
+### Approach
 
-Click [here](https://whimsical.com/project-2-wireframes-4zHBvk17jQoke5LnQgJLHc) to view the wireframes of Mines Sweeper! 
+My planning process was the most extensive because I want to focus on the practicality and usability of this app. I wanted it to be simple in design and functionality as the main demographic of my users would be in the central region of Vietnam. This ensures a level of accessibility while maintaining the structural integrity of the project. 
+
+> For example, instead of users inputting their emails, they would just need to provide their contact information. I've also set up my user models where the phone number input field can take phone numbers beyond the US. 
+
+Additionally, I did some preliminary research from various agency-related forms to make sure I capture the most useful information. 
+
+Beyond that, I wanted to make sure my data models were correct and had the right associations and relations. Figuring out the logic for this app and how the data tables would be set up took the next huge chunk of my time as it was critical to my app's functionality. 
+
+I've decided to seed my province model with data of the province names in the northern central region of Vietnam. This ensures that the app is relevant and region-specific. 
+
+Overall, I am immensely proud of how my app functions and hope to implement a maps and geocoder API for data visualizations. This project has strong potential for expansion that I plan to work on post project presentations.
 
 ----------------------------------------------------------
 ### Unsolved Problems
